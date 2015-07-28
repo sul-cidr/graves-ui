@@ -1,6 +1,6 @@
 
 
-var Map = require('./views/map');
+import Map from './views/map';
 
 
 new Map();
