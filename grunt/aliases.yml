@@ -1,0 +1,20 @@
+
+compile:
+  - jade
+  - browserify
+  - less
+  - symlink
+
+compile:min:
+  - compile
+  - uglify
+  - cssmin
+
+server:
+  - connect
+  - watch
+
+default:
+  - clean
+  - compile
+  - server
