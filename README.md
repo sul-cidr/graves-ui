@@ -1,3 +1,3 @@
-## Chinese Graves - Narrative Mockups
+## Chinese Graves - UI Mockups
 
-UI mockups for the Chinese Graves spatial narratives.
+Mockups for the Chinese Graves spatial narratives.
