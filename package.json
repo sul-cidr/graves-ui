@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "backbone": "^1.2.1",
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+    "leaflet": "^1.0.0-beta.1"
   }
 }
