@@ -7,7 +7,7 @@ import configRoutes from './app/config/routes';
 
 var app = express();
 
-// Set config.
+// Apply config.
 configExpress(app);
 configRoutes(app);
 
