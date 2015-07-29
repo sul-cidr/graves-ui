@@ -7,6 +7,7 @@ import debug from 'debug';
 var log = debug('graves');
 
 
-var server = app.listen(app.get('port'), function() {
-  log(`'Listening on port ${server.address().port}`);
+// Start the server.
+app.listen(app.get('port'), function() {
+  log(`Listening on port ${app.get('port')}`);
 });
