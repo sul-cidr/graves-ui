@@ -1,8 +1,12 @@
 
 
-var app = require('./server');
-var debug = require('debug')('graves');
+import app from './server';
+import debug from 'debug';
+
+
+var log = debug('graves');
+
 
 var server = app.listen(3000, function() {
-  debug('Listening on port ' + server.address().port);
+  log('Listening on port ' + server.address().port);
 });
