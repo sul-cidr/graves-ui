@@ -11,8 +11,8 @@ module.exports = {
   },
 
   dist: {
-    src: 'src/javascripts/index.js',
-    dest: '<%= site %>/script.js'
+    src: '<%= src %>/javascripts/index.js',
+    dest: '<%= dest %>/script.js'
   }
 
 };
