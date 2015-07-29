@@ -29,12 +29,19 @@ export default Backbone.View.extend({
     });
 
     // Zoom buttons on top right.
-    var zoom = L.control.zoom({ position: 'topright' });
-    this.map.addControl(zoom);
+    var zoomControl = L.control.zoom({
+      position: 'topright'
+    });
 
-    // Create an OSM tile layer.
-    var url = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-    L.tileLayer(url).addTo(this.map);
+    this.map.addControl(zoomControl);
+
+    // OSM base layer.
+    var osmLayer = L.tileLayer(
+      '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { detectRetina: true }
+    );
+
+    this.map.addLayer(osmLayer);
 
     // TODO: Where to focus?
     this.map.setView([30, 110], 5);
