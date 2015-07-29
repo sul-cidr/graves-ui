@@ -24,7 +24,13 @@ export default Backbone.View.extend({
    */
   _initLeaflet: function() {
 
-    this.map = L.map(this.el);
+    this.map = L.map(this.el, {
+      zoomControl: false
+    });
+
+    // Zoom buttons on top right.
+    var zoom = L.control.zoom({ position: 'topright' });
+    this.map.addControl(zoom);
 
     // Create an OSM tile layer.
     var url = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
