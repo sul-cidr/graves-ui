@@ -8,5 +8,5 @@ var log = debug('graves');
 
 
 var server = app.listen(3000, function() {
-  log('Listening on port ' + server.address().port);
+  log(`'Listening on port ${server.address().port}`);
 });
