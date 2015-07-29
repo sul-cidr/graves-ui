@@ -4,7 +4,7 @@ import app from './server';
 import debug from 'debug';
 
 
-var log = debug('graves');
+let log = debug('graves');
 
 
 // Start the server.
