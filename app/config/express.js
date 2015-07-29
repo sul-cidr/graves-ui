@@ -9,6 +9,9 @@ export default (app) => {
   let root = path.normalize(`${__dirname}/../..`);
   let env = process.env.NODE_ENV || 'development';
 
+  // Assign the port.
+  app.set('port', process.env.PORT || 3000);
+
   // Set the static asset root.
   app.use(express.static(root+'/public'));
 
