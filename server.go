@@ -1,19 +1,24 @@
 package main
 
 import (
-	"github.com/go-martini/martini"
-	"github.com/martini-contrib/render"
+	"fmt"
+	"github.com/codegangsta/negroni"
+	"github.com/gorilla/mux"
+	"net/http"
 )
+
+func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hi!")
+}
 
 func main() {
 
-	m := martini.Classic()
-	m.Use(render.Renderer())
+	r := mux.NewRouter()
+	r.HandleFunc("/", HomeHandler)
 
-	m.Get("/", func(r render.Render) {
-		r.HTML(200, "home", nil)
-	})
+	n := negroni.Classic()
+	n.UseHandler(r)
 
-	m.Run()
+	n.Run(":8000")
 
 }
