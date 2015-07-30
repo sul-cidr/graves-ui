@@ -29,14 +29,14 @@ export default Backbone.View.extend({
     });
 
     // Zoom buttons on top right.
-    var zoomControl = L.control.zoom({
+    let zoomControl = L.control.zoom({
       position: 'topright'
     });
 
     this.map.addControl(zoomControl);
 
     // OSM base layer.
-    var osmLayer = L.tileLayer(
+    let osmLayer = L.tileLayer(
       '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       { detectRetina: true }
     );
