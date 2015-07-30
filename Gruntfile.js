@@ -9,8 +9,14 @@ module.exports = function(grunt) {
   require('jit-grunt')(grunt);
 
   require('load-grunt-config')(grunt, {
+
     loadGruntTasks: false,
-    data: { site: '_site' }
+
+    data: {
+      src: 'public/src',
+      dist: 'public/dist'
+    }
+
   });
 
 };

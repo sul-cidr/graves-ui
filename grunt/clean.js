@@ -1,5 +1,5 @@
 
 
 export default {
-  dist: '<%= site %>'
+  dist: '<%= dist %>'
 };

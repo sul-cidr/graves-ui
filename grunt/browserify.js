@@ -11,8 +11,8 @@ export default {
   },
 
   dist: {
-    src: 'src/javascripts/index.js',
-    dest: '<%= site %>/script.js'
+    src: '<%= src %>/javascripts/index.js',
+    dest: '<%= dist %>/script.js'
   }
 
 };

@@ -3,8 +3,8 @@
 export default {
 
   dist: {
-    src: 'src/templates/index.jade',
-    dest: '<%= site %>/index.html'
+    src: '<%= src %>/templates/index.jade',
+    dest: '<%= dist %>/index.html'
   }
 
 };
