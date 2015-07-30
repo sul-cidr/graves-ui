@@ -1,5 +1,8 @@
 
 
+import fs from 'fs';
+
+
 export default {
 
   dev: {
@@ -15,7 +18,13 @@ export default {
 
       callback: (nodemon) => {
         nodemon.on('restart', () => {
-          console.log('restart');
+
+          // When nodemon restarts, wait 500ms and then touch a .reboot file,
+          // which will trigger a reload.
+          setTimeout(() => {
+            fs.writeFileSync('public/dist/.reboot', Date.now());
+          }, 500);
+
         });
       }
 
