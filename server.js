@@ -28,4 +28,9 @@ app.get('/', (req, res) => {
 });
 
 
+app.get('/towns', (req, res) => {
+  res.send('towns');
+});
+
+
 export default app;
