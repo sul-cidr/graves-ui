@@ -1,0 +1,2 @@
+
+SELECT * FROM towns_2000 LIMIT 100;
