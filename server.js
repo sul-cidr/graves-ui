@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/towns', (req, res) => {
+app.get('/api/towns', (req, res) => {
   res.send('towns');
 });
 
