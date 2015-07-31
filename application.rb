@@ -49,9 +49,18 @@ get '/counties' do
 end
 
 get '/burials' do
-  # TODO
-end
 
-get '/notices' do
-  # TODO
+  content_type :json
+
+  DB[:townmatch]
+    .select(
+      Sequel.lit('ST_AsText(towns_2000.geom)').as(:geom),
+      Sequel.as(:ename, :town),
+      Sequel.as(:num_graves, :count),
+    )
+    .join(:towns_2000, :gbtown => :gbtownship)
+    .join(:master_20150601, :rid => :townmatch__rid)
+    .to_a
+    .to_json
+
 end
