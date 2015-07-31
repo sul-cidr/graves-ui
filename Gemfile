@@ -11,4 +11,5 @@ gem 'slim'
 group :development do
   gem 'foreman'
   gem 'shotgun'
+  gem 'rack-livereload'
 end

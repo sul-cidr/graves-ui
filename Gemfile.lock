@@ -6,6 +6,8 @@ GEM
       thor (~> 0.19.1)
     json (1.8.3)
     rack (1.6.4)
+    rack-livereload (0.3.16)
+      rack
     rack-protection (1.5.3)
       rack
     rake (10.4.2)
@@ -30,6 +32,7 @@ DEPENDENCIES
   dotenv
   foreman
   json
+  rack-livereload
   rake
   require_all
   shotgun
