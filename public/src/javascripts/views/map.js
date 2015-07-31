@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import L from 'leaflet';
 import wellknown from 'wellknown';
+import * as omnivore from 'leaflet-omnivore'
 import {swap} from '../utils'
 
 
@@ -18,7 +19,8 @@ export default Backbone.View.extend({
    */
   initialize: function() {
     this._initLeaflet();
-    this._initTowns();
+    this.plotTowns();
+    this.plotCounties();
   },
 
 
@@ -55,7 +57,7 @@ export default Backbone.View.extend({
   /**
    * Plot towns.
    */
-  _initTowns: function() {
+  plotTowns: function() {
     $.getJSON('towns', (data) => {
       for (var t of data) {
 
@@ -63,15 +65,37 @@ export default Backbone.View.extend({
         var point = wellknown(t.geom).coordinates[0];
 
         // Create the marker.
-        var marker = L.circleMarker(swap(point), {
+        var layer = L.circleMarker(swap(point), {
           radius: 2,
           fillColor: 'red',
           opacity: 0.9,
           stroke: false,
         });
 
-        // Render on map.
-        this.map.addLayer(marker);
+        // Add to map.
+        this.map.addLayer(layer);
+
+      }
+    });
+  },
+
+
+  /**
+   * Plot counties.
+   */
+  plotCounties: function() {
+    $.getJSON('counties', (data) => {
+      for (var c of data) {
+
+        // Parse WKT.
+        var points = wellknown(c.geom);
+
+        // Create the polygon.
+        var layer = new L.GeoJSON(points, {
+          weight: 2
+        });
+
+        this.map.addLayer(layer);
 
       }
     });
