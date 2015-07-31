@@ -3,6 +3,8 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import L from 'leaflet';
+import wellknown from 'wellknown';
+import {swap} from '../utils'
 
 
 export default Backbone.View.extend({
@@ -16,6 +18,7 @@ export default Backbone.View.extend({
    */
   initialize: function() {
     this._initLeaflet();
+    this._initTowns();
   },
 
 
@@ -46,6 +49,32 @@ export default Backbone.View.extend({
     // TODO: Where to focus?
     this.map.setView([30, 110], 5);
 
+  },
+
+
+  /**
+   * Plot towns.
+   */
+  _initTowns: function() {
+    $.getJSON('towns', (data) => {
+      for (var t of data) {
+
+        // Parse WKT.
+        var point = wellknown(t.geom).coordinates[0];
+
+        // Create the marker.
+        var marker = L.circleMarker(swap(point), {
+          radius: 2,
+          fillColor: 'red',
+          opacity: 0.9,
+          stroke: false,
+        });
+
+        // Render on map.
+        this.map.addLayer(marker);
+
+      }
+    });
   },
 
 
