@@ -4,7 +4,7 @@ export default {
 
   options: {
     watch: true,
-    transform: ['babelify'],
+    transform: ['babelify', 'yamlify'],
     browserifyOptions: {
       debug: true
     }

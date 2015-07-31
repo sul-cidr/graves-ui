@@ -6,6 +6,7 @@ import L from 'leaflet';
 import wellknown from 'wellknown';
 import * as omnivore from 'leaflet-omnivore'
 import {swap} from '../utils'
+import * as styles from './map.yml';
 
 
 export default Backbone.View.extend({
@@ -18,9 +19,12 @@ export default Backbone.View.extend({
    * Start the map.
    */
   initialize: function() {
+
     this._initLeaflet();
+
     this.plotTowns();
     this.plotCounties();
+
   },
 
 
@@ -65,14 +69,7 @@ export default Backbone.View.extend({
         var point = wellknown(t.geom).coordinates[0];
 
         // Create the marker.
-        var layer = L.circleMarker(swap(point), {
-          radius: 2,
-          fillColor: 'red',
-          opacity: 0.9,
-          stroke: false,
-        });
-
-        // Add to map.
+        var layer = L.circleMarker(swap(point), styles.town);
         this.map.addLayer(layer);
 
       }
@@ -91,10 +88,7 @@ export default Backbone.View.extend({
         var points = wellknown(c.geom);
 
         // Create the polygon.
-        var layer = new L.GeoJSON(points, {
-          weight: 2
-        });
-
+        var layer = new L.GeoJSON(points, styles.county);
         this.map.addLayer(layer);
 
       }

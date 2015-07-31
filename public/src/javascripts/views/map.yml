@@ -1,0 +1,10 @@
+---
+
+town:
+  radius: 2
+  fillColor: red
+  opacity: 0.9
+  stroke: False
+
+county:
+  weight: 1
