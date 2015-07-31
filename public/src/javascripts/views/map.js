@@ -63,16 +63,17 @@ export default Backbone.View.extend({
    */
   plotTowns: function() {
     $.getJSON('towns', (data) => {
-      for (var t of data) {
 
-        // Parse WKT.
-        var point = wellknown(t.geom).coordinates[0];
+      // Parse WKT -> GeoJSON.
+      let features = data.map(t => {
+        let point = wellknown(t.geom).coordinates[0];
+        return L.circleMarker(swap(point), styles.town);
+      });
 
-        // Create the marker.
-        var layer = L.circleMarker(swap(point), styles.town);
-        this.map.addLayer(layer);
+      // Add feature group to map.
+      this.towns = L.featureGroup(features);
+      this.towns.addTo(this.map);
 
-      }
     });
   },
 
@@ -82,16 +83,20 @@ export default Backbone.View.extend({
    */
   plotCounties: function() {
     $.getJSON('counties', (data) => {
-      for (var c of data) {
 
-        // Parse WKT.
-        var points = wellknown(c.geom);
+      // Parse WKT -> GeoJSON.
+      let features = data.map(c => {
+        let points = wellknown(c.geom);
+        return new L.GeoJSON(points, styles.county);
+      });
 
-        // Create the polygon.
-        var layer = new L.GeoJSON(points, styles.county);
-        this.map.addLayer(layer);
+      // Add feature group to map.
+      this.counties = L.featureGroup(features);
+      this.counties.addTo(this.map);
 
-      }
+      // Move below points.
+      this.counties.bringToBack();
+
     });
   },
 
