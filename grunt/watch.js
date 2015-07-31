@@ -10,7 +10,7 @@ export default {
   },
 
   stylesheets: {
-    files: '<%= src %>/stylesheets/*.less',
+    files: '<%= src %>/stylesheets/*',
     tasks: 'less'
   }
 
