@@ -5,8 +5,9 @@ gem 'sinatra'
 gem 'rake'
 gem 'require_all'
 gem 'dotenv'
+gem 'json'
 
 group :development do
   gem 'foreman'
-  gem 'rerun'
+  gem 'shotgun'
 end
