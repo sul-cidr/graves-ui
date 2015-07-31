@@ -1,12 +1,16 @@
 
 
-require 'json'
-require 'require_all'
 require 'sinatra'
+require 'require_all'
+require 'json'
+require 'slim'
 
 require_rel 'environment'
 
+configure do
+  set :views, "#{File.dirname(__FILE__)}/views"
+end
+
 get "/" do
-  content_type :json
-  { test: 5}.to_json
+  slim :index
 end
