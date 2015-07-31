@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+libs = []
+libs << "irb/completion"
+libs << './environment.rb'
+
+cli = []
+cli << "irb"
+
+cli << libs.inject("") do |acc, lib|
+  acc + %( -r "#{lib}")
+end
+
+cli << "--simple-prompt"
+cmd = cli.join(" ")
+
+puts "Chinese Graves"
+exec cmd
