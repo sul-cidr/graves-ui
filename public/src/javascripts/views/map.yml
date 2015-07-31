@@ -9,5 +9,5 @@ county:
   weight: 1
 
 burial:
-  fillColor: blue
+  fillColor: black
   weight: 1

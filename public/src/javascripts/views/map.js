@@ -115,9 +115,12 @@ export default Backbone.View.extend({
         // Extract the coordinates.
         let point = wellknown(b.geom).coordinates[0];
 
+        // Assume 20 graves. TODO: Valid?
+        let count = b.count || 20;
+
         // Apply the grave size.
         let style = _.merge(styles.burial, {
-          radius: Math.log(b.count) * 3
+          radius: Math.log(count)*3
         });
 
         return L.circleMarker(swap(point), style);
