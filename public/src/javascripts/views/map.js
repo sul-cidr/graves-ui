@@ -1,5 +1,6 @@
 
 
+import _ from 'lodash';
 import $ from 'jquery';
 import Backbone from 'backbone';
 import L from 'leaflet';
@@ -22,8 +23,9 @@ export default Backbone.View.extend({
 
     this._initLeaflet();
 
-    this.plotTowns();
-    this.plotCounties();
+    //this.plotTowns();
+    //this.plotCounties();
+    this.plotBurials();
 
   },
 
@@ -96,6 +98,35 @@ export default Backbone.View.extend({
 
       // Move below points.
       this.counties.bringToBack();
+
+    });
+  },
+
+
+  /**
+   * Plot counties.
+   */
+  plotBurials: function() {
+    $.getJSON('burials', (data) => {
+
+      // Parse WKT -> GeoJSON.
+      let features = data.map(b => {
+
+        // Extract the coordinates.
+        let point = wellknown(b.geom).coordinates[0];
+
+        // Apply the grave size.
+        let style = _.merge(styles.burial, {
+          radius: Math.log(b.count) * 3
+        });
+
+        return L.circleMarker(swap(point), style);
+
+      });
+
+      // Add feature group to map.
+      this.towns = L.featureGroup(features);
+      this.towns.addTo(this.map);
 
     });
   },
