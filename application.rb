@@ -47,3 +47,11 @@ get '/counties' do
     .to_json
 
 end
+
+get '/burials' do
+  # TODO
+end
+
+get '/notices' do
+  # TODO
+end
