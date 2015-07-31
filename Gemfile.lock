@@ -6,6 +6,7 @@ GEM
     rack-protection (1.5.3)
       rack
     rake (10.4.2)
+    require_all (1.3.2)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -18,6 +19,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   rake
+  require_all
   sinatra
 
 BUNDLED WITH
