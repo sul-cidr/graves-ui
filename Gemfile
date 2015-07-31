@@ -7,6 +7,7 @@ gem 'require_all'
 gem 'dotenv'
 gem 'json'
 gem 'slim'
+gem 'redcarpet'
 gem 'sequel'
 
 group :development do

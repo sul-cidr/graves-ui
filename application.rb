@@ -4,6 +4,7 @@ require 'sinatra'
 require 'require_all'
 require 'json'
 require 'slim'
+require 'slim/include'
 
 require_rel 'environment'
 
@@ -34,14 +35,14 @@ get '/towns' do
 
 end
 
-get '/counties' do
+get '/provinces' do
 
   content_type :json
 
-  DB[:county_cdc_4326]
+  DB[:province_cdc_4326]
     .select(
       Sequel.lit('ST_AsText(geom)').as(:geom),
-      Sequel.as(:ename, :name),
+      Sequel.as(:proven, :name),
     )
     .to_a
     .to_json

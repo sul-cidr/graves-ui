@@ -20,13 +20,9 @@ export default Backbone.View.extend({
    * Start the map.
    */
   initialize: function() {
-
     this._initLeaflet();
-
-    //this.plotTowns();
-    //this.plotCounties();
+    this.plotProvinces();
     this.plotBurials();
-
   },
 
 
@@ -81,10 +77,10 @@ export default Backbone.View.extend({
 
 
   /**
-   * Plot counties.
+   * Plot provinces.
    */
-  plotCounties: function() {
-    $.getJSON('counties', (data) => {
+  plotProvinces: function() {
+    $.getJSON('provinces', (data) => {
 
       // Parse WKT -> GeoJSON.
       let features = data.map(c => {
@@ -104,7 +100,7 @@ export default Backbone.View.extend({
 
 
   /**
-   * Plot counties.
+   * Plot burials.
    */
   plotBurials: function() {
     $.getJSON('burials', (data) => {

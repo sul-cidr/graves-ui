@@ -9,5 +9,7 @@ county:
   weight: 1
 
 burial:
+  color: orange
   fillColor: black
+  fillOpacity: 0.3
   weight: 1
