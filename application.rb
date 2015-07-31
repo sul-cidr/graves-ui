@@ -19,6 +19,9 @@ get '/towns' do
 
   content_type :json
 
+  # By default, limit to 1k.
+  count = params.fetch('count', 1000)
+
   DB[:towns_2000]
     .select(
       Sequel.lit('ST_AsText(geom)').as(:geom),
@@ -27,7 +30,7 @@ get '/towns' do
       Sequel.as(:ename3, :county),
       Sequel.as(:ename, :town),
     )
-    .limit(100)
+    .limit(count)
     .to_a
     .to_json
 
