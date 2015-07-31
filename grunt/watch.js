@@ -5,8 +5,7 @@ export default {
   livereload: {
     files: '<%= dist %>/*',
     options: {
-      livereload: true,
-      dot: true
+      livereload: true
     }
   },
 
