@@ -13,8 +13,8 @@ module.exports = function(grunt) {
     loadGruntTasks: false,
 
     data: {
-      src: 'static/src',
-      dist: 'static/dist'
+      src: 'public/src',
+      dist: 'public/dist'
     }
 
   });
