@@ -3,6 +3,7 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import View from '../lib/view';
+import * as styles from './spans.yml';
 
 
 export default View.extend({
@@ -60,8 +61,8 @@ export default View.extend({
     let span = $(`[data-id=${id}]`);
     let offset = span.offset();
 
-    let x = offset.left + span.outerWidth() + 5;
-    let y = offset.top + 5;
+    let x = offset.left + span.outerWidth() + styles.offset.padding;
+    let y = offset.top + styles.offset.padding;
 
     return [x, y];
 
