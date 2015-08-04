@@ -1,5 +1,6 @@
 
 
+import $ from 'jquery';
 import Backbone from 'backbone';
 import View from '../lib/view';
 
@@ -33,7 +34,8 @@ export default View.extend({
    * @param {Object} e
    */
   publishHighlight: function(e) {
-    this.channels.global.trigger('highlight');
+    let id = $(e.target).attr('data-id');
+    this.channels.global.trigger('highlight', id);
   },
 
 
@@ -43,7 +45,8 @@ export default View.extend({
    * @param {Object} e
    */
   publishUnhighlight: function(e) {
-    this.channels.global.trigger('unhighlight');
+    let id = $(e.target).attr('data-id');
+    this.channels.global.trigger('unhighlight', id);
   },
 
 
