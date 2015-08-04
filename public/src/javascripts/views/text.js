@@ -1,9 +1,10 @@
 
 
 import Backbone from 'backbone';
+import View from '../lib/view';
 
 
-export default Backbone.View.extend({
+export default View.extend({
 
 
   el: '#text',

@@ -9,9 +9,10 @@ import * as omnivore from 'leaflet-omnivore'
 import {swap} from '../utils'
 import * as styles from './map.yml';
 import burialTpl from './burial.jade'
+import View from '../lib/view';
 
 
-export default Backbone.View.extend({
+export default View.extend({
 
 
   el: '#map',
