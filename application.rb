@@ -63,6 +63,7 @@ get '/burials' do
 
   DB[:townmatch]
     .select(
+      Sequel.as(:townmatch__rid, :id),
       Sequel.lit('ST_AsText(towns_2000.geom)').as(:geom),
       Sequel.as(:ename, :town),
       Sequel.as(:num_graves, :count),
