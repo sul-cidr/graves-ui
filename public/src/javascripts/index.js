@@ -1,8 +1,8 @@
 
 
 import Map from './controllers/map';
-import Text from './controllers/text';
+import Spans from './controllers/spans';
 
 
 new Map();
-new Text();
+new Spans();
