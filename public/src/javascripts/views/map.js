@@ -63,26 +63,8 @@ export default Backbone.View.extend({
 
     // Parse WKT -> GeoJSON.
     let features = data.map(c => {
-
-      // Create the polygon.
-      let feature = new L.GeoJSON(
-        wellknown(c.geom), styles.county
-      );
-
-      // Highlight.
-      feature.on(
-        'mouseover',
-        this.highlightProvince.bind(this)
-      );
-
-      // Unhighlight.
-      feature.on(
-        'mouseout',
-        this.unhighlightProvince.bind(this)
-      );
-
-      return feature;
-
+      let points = wellknown(c.geom);
+      return new L.GeoJSON(points, styles.province);
     });
 
     // Add feature group to map.
@@ -108,15 +90,28 @@ export default Backbone.View.extend({
       // Extract the coordinates.
       let point = wellknown(b.geom).coordinates[0];
 
-      // Assume 20 graves. TODO: Valid?
-      let count = b.count || 20;
+      // Create the marker.
+      let feature = L.circleMarker(
+        swap(point),
+        styles.burial.default
+      );
 
-      // Apply the grave size.
-      let style = _.merge(styles.burial, {
-        radius: Math.log(count)*3
-      });
+      // Set the radius. Assume 20 graves.
+      feature.setRadius(Math.log(b.count || 20)*3);
 
-      return L.circleMarker(swap(point), style);
+      // Highlight.
+      feature.on(
+        'mouseover',
+        this.highlightBurial.bind(this)
+      );
+
+      // Unhighlight.
+      feature.on(
+        'mouseout',
+        this.unhighlightBurial.bind(this)
+      );
+
+      return feature;
 
     });
 
@@ -128,12 +123,12 @@ export default Backbone.View.extend({
 
 
   /**
-   * Highlight a province.
+   * Highlight a burial.
    *
    * @param {Object} e
    */
-  highlightProvince: function(e) {
-    console.log('highlight', e);
+  highlightBurial: function(e) {
+    e.target.setStyle(styles.burial.highlight);
   },
 
 
@@ -142,8 +137,8 @@ export default Backbone.View.extend({
    *
    * @param {Object} e
    */
-  unhighlightProvince: function(e) {
-    console.log('unhighlight', e);
+  unhighlightBurial: function(e) {
+    e.target.setStyle(styles.burial.default);
   },
 
 
