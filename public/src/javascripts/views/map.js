@@ -31,7 +31,8 @@ export default Backbone.View.extend({
   _initLeaflet: function() {
 
     this.map = L.map(this.el, {
-      zoomControl: false
+      zoomControl: false,
+      fadeAnimation: false,
     });
 
     // Zoom buttons on top right.
@@ -135,6 +136,7 @@ export default Backbone.View.extend({
    */
   highlightBurial: function(e) {
     e.target.setStyle(styles.burial.highlight);
+    e.target.openPopup();
   },
 
 
@@ -145,6 +147,7 @@ export default Backbone.View.extend({
    */
   unhighlightBurial: function(e) {
     e.target.setStyle(styles.burial.default);
+    e.target.closePopup();
   },
 
 
