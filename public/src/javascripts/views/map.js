@@ -87,6 +87,8 @@ export default View.extend({
    */
   plotBurials: function(data) {
 
+    this.idToBurial = {};
+
     // Parse WKT -> GeoJSON.
     let features = data.map(b => {
 
@@ -119,6 +121,9 @@ export default View.extend({
         this.unhighlightBurial.bind(this)
       );
 
+      // Map id -> feature.
+      this.idToBurial[b.id] = feature;
+
       return feature;
 
     });
@@ -149,6 +154,24 @@ export default View.extend({
   unhighlightBurial: function(e) {
     e.target.setStyle(styles.burial.default);
     e.target.closePopup();
+  },
+
+
+  /**
+   * Get the window-space offset of a burial marker.
+   *
+   * @param {Number} id
+   */
+  getBurialOffset: function(id) {
+
+    // ID -> coordinate.
+    let latLng = this.idToBurial[id].getLatLng();
+
+    // Coordinate -> layer point.
+    let point = this.map.latLngToLayerPoint(latLng);
+
+    return [point.x, point.y];
+
   },
 
 

@@ -55,7 +55,7 @@ export default Controller.extend({
    * @param {Number} id
    */
   getBurialOffset: function(id) {
-    return [0, 0];
+    return this.view.getBurialOffset(id);
   },
 
 

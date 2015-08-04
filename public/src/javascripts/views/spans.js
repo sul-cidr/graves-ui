@@ -1,5 +1,6 @@
 
 
+import _ from 'lodash';
 import $ from 'jquery';
 import Backbone from 'backbone';
 import View from '../lib/view';
@@ -22,7 +23,7 @@ export default View.extend({
 
 
   /**
-   * Start the map.
+   * Select spans, bind events.
    */
   initialize: function() {
     // TODO
