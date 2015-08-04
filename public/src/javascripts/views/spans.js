@@ -50,4 +50,22 @@ export default View.extend({
   },
 
 
+  /**
+   * Get the window-space offset of a span.
+   *
+   * @param {Number} id
+   */
+  getSpanOffset: function(id) {
+
+    let span = $(`[data-id=${id}]`);
+    let offset = span.offset();
+
+    let x = offset.left + span.outerWidth() + 5;
+    let y = offset.top + 5;
+
+    return [x, y];
+
+  },
+
+
 });

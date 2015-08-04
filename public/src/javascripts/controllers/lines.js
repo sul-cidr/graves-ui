@@ -13,7 +13,7 @@ export default Controller.extend({
   },
 
 
-  channels: ['global'],
+  channels: ['map', 'spans'],
 
 
   /**
@@ -30,7 +30,13 @@ export default Controller.extend({
    * @param {Number} id
    */
   highlight: function(id) {
-    // TODO
+
+    // Get window-space offsets for the span and marker.
+    let tOffset = this.channels.spans.request('spanOffset', id);
+    let mOffset = this.channels.map.request('markerOffset', id);
+
+    console.log(tOffset);
+
   },
 
 
