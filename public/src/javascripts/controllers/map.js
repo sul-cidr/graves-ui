@@ -8,6 +8,14 @@ import Map from '../views/map';
 export default Controller.extend({
 
 
+  channel: 'map',
+
+
+  requests: {
+    burialOffset: 'getBurialOffset',
+  },
+
+
   /**
    * Start the view.
    */
@@ -15,8 +23,8 @@ export default Controller.extend({
 
     this.view = new Map();
 
-    this.loadProvinces();
-    this.loadBurials();
+    this._loadProvinces();
+    this._loadBurials();
 
   },
 
@@ -24,7 +32,7 @@ export default Controller.extend({
   /**
    * Load province polygons.
    */
-  loadProvinces: function() {
+  _loadProvinces: function() {
     $.getJSON('provinces', (data) => {
       this.view.plotProvinces(data);
     });
@@ -34,10 +42,20 @@ export default Controller.extend({
   /**
    * Load burial sites.
    */
-  loadBurials: function() {
+  _loadBurials: function() {
     $.getJSON('burials', (data) => {
       this.view.plotBurials(data);
     });
+  },
+
+
+  /**
+   * Given a burial id, get the window-space offset of the marker.
+   *
+   * @param {Number} id
+   */
+  getBurialOffset: function(id) {
+    return [0, 0];
   },
 
 

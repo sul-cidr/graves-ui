@@ -8,7 +8,7 @@ export default Controller.extend({
 
   events: {
     global: {
-      highlight: 'highlight'
+      highlight: 'onHighlight'
     }
   },
 
@@ -29,13 +29,13 @@ export default Controller.extend({
    *
    * @param {Number} id
    */
-  highlight: function(id) {
+  onHighlight: function(id) {
 
     // Get window-space offsets for the span and marker.
     let tOffset = this.channels.spans.request('spanOffset', id);
-    let mOffset = this.channels.map.request('markerOffset', id);
+    let mOffset = this.channels.map.request('burialOffset', id);
 
-    console.log(tOffset);
+    console.log(tOffset, mOffset);
 
   },
 

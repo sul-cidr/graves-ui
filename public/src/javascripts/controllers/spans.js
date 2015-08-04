@@ -11,7 +11,7 @@ export default Controller.extend({
 
 
   requests: {
-    spanOffset: 'spanOffset',
+    spanOffset: 'getSpanOffset',
   },
 
 
@@ -28,7 +28,7 @@ export default Controller.extend({
    *
    * @param {Number} id
    */
-  spanOffset: function(id) {
+  getSpanOffset: function(id) {
     return this.view.getSpanOffset(id);
   },
 

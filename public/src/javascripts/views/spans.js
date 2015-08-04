@@ -61,6 +61,7 @@ export default View.extend({
     let span = $(`[data-id=${id}]`);
     let offset = span.offset();
 
+    // Use the top left corner as the anchor.
     let x = offset.left + span.outerWidth() + styles.offset.padding;
     let y = offset.top + styles.offset.padding;
 
