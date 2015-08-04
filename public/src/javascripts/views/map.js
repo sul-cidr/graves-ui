@@ -63,8 +63,26 @@ export default Backbone.View.extend({
 
     // Parse WKT -> GeoJSON.
     let features = data.map(c => {
-      let points = wellknown(c.geom);
-      return new L.GeoJSON(points, styles.county);
+
+      // Create the polygon.
+      let feature = new L.GeoJSON(
+        wellknown(c.geom), styles.county
+      );
+
+      // Highlight.
+      feature.on(
+        'mouseover',
+        this.highlightProvince.bind(this)
+      );
+
+      // Unhighlight.
+      feature.on(
+        'mouseout',
+        this.unhighlightProvince.bind(this)
+      );
+
+      return feature;
+
     });
 
     // Add feature group to map.
@@ -106,6 +124,26 @@ export default Backbone.View.extend({
     this.towns = L.featureGroup(features);
     this.towns.addTo(this.map);
 
+  },
+
+
+  /**
+   * Highlight a province.
+   *
+   * @param {Object} e
+   */
+  highlightProvince: function(e) {
+    console.log('highlight', e);
+  },
+
+
+  /**
+   * Unhighlight a province.
+   *
+   * @param {Object} e
+   */
+  unhighlightProvince: function(e) {
+    console.log('unhighlight', e);
   },
 
 
