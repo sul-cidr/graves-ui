@@ -8,6 +8,7 @@ import wellknown from 'wellknown';
 import * as omnivore from 'leaflet-omnivore'
 import {swap} from '../utils'
 import * as styles from './map.yml';
+import burialTpl from './burial.jade'
 
 
 export default Backbone.View.extend({
@@ -96,8 +97,13 @@ export default Backbone.View.extend({
         styles.burial.default
       );
 
-      // Set the radius. Assume 20 graves.
+      // Set radius. (Default to 20 graves?)
       feature.setRadius(Math.log(b.count || 20)*3);
+
+      // Attach the popup.
+      feature.bindPopup(burialTpl({ name: b.town }), {
+        closeButton: false
+      });
 
       // Highlight.
       feature.on(

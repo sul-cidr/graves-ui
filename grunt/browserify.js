@@ -3,11 +3,18 @@
 export default {
 
   options: {
+
+    transform: [
+      'babelify',
+      'jadeify',
+      'yamlify',
+    ],
+
     watch: true,
-    transform: ['babelify', 'yamlify'],
     browserifyOptions: {
       debug: true
     }
+
   },
 
   dist: {
