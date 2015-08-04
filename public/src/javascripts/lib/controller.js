@@ -33,7 +33,7 @@ Controller.extend = Backbone.Model.extend;
  */
 Controller.prototype._bindEvents = function() {
 
-  for (let [channelName, map] of this.events) {
+  _.each(this.events, (map, channelName) => {
 
     // Connect to channel.
     let channel = Radio.channel(channelName);
@@ -43,7 +43,7 @@ Controller.prototype._bindEvents = function() {
       channel.on(event, this[method], this);
     }
 
-  }
+  });
 
 };
 
@@ -53,8 +53,11 @@ Controller.prototype._bindEvents = function() {
  */
 Controller.prototype._bindRequests = function() {
 
-  // Break if no local channel.
-  if (!_.isString(this.channel)) {
+  // Half if no requests.
+  if (!_.isObject(this.requests)) return;
+
+  // Error if no channel name..
+  else if (!_.isString(this.channel)) {
     throw new Error('You must provide a local channel name.');
   }
 
@@ -62,8 +65,11 @@ Controller.prototype._bindRequests = function() {
   this.channel = Radio.channel(this.channel);
 
   // Bind requests -> callbacks.
-  for (let [request, method] of this.requests) {
+  _.each(this.requests, (method, request) => {
     this.channel.reply(request, this[method], this);
-  }
+  });
 
 };
+
+
+export default Controller;

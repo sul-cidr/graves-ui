@@ -1,6 +1,6 @@
 
 
-import Map from './views/map';
+import Map from './controllers/map';
 
 
 new Map();
