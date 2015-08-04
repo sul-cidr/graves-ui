@@ -21,8 +21,6 @@ export default Backbone.View.extend({
    */
   initialize: function() {
     this._initLeaflet();
-    this.plotProvinces();
-    this.plotBurials();
   },
 
 
@@ -57,77 +55,57 @@ export default Backbone.View.extend({
 
 
   /**
-   * Plot towns.
-   */
-  plotTowns: function() {
-    $.getJSON('towns', (data) => {
-
-      // Parse WKT -> GeoJSON.
-      let features = data.map(t => {
-        let point = wellknown(t.geom).coordinates[0];
-        return L.circleMarker(swap(point), styles.town);
-      });
-
-      // Add feature group to map.
-      this.towns = L.featureGroup(features);
-      this.towns.addTo(this.map);
-
-    });
-  },
-
-
-  /**
    * Plot provinces.
+   *
+   * @param {Object} data
    */
-  plotProvinces: function() {
-    $.getJSON('provinces', (data) => {
+  plotProvinces: function(data) {
 
-      // Parse WKT -> GeoJSON.
-      let features = data.map(c => {
-        let points = wellknown(c.geom);
-        return new L.GeoJSON(points, styles.county);
-      });
-
-      // Add feature group to map.
-      this.counties = L.featureGroup(features);
-      this.counties.addTo(this.map);
-
-      // Move below points.
-      this.counties.bringToBack();
-
+    // Parse WKT -> GeoJSON.
+    let features = data.map(c => {
+      let points = wellknown(c.geom);
+      return new L.GeoJSON(points, styles.county);
     });
+
+    // Add feature group to map.
+    this.counties = L.featureGroup(features);
+    this.counties.addTo(this.map);
+
+    // Move below points.
+    this.counties.bringToBack();
+
   },
 
 
   /**
    * Plot burials.
+   *
+   * @param {Object} data
    */
-  plotBurials: function() {
-    $.getJSON('burials', (data) => {
+  plotBurials: function(data) {
 
-      // Parse WKT -> GeoJSON.
-      let features = data.map(b => {
+    // Parse WKT -> GeoJSON.
+    let features = data.map(b => {
 
-        // Extract the coordinates.
-        let point = wellknown(b.geom).coordinates[0];
+      // Extract the coordinates.
+      let point = wellknown(b.geom).coordinates[0];
 
-        // Assume 20 graves. TODO: Valid?
-        let count = b.count || 20;
+      // Assume 20 graves. TODO: Valid?
+      let count = b.count || 20;
 
-        // Apply the grave size.
-        let style = _.merge(styles.burial, {
-          radius: Math.log(count)*3
-        });
-
-        return L.circleMarker(swap(point), style);
-
+      // Apply the grave size.
+      let style = _.merge(styles.burial, {
+        radius: Math.log(count)*3
       });
 
-      // Add feature group to map.
-      this.towns = L.featureGroup(features);
-      this.towns.addTo(this.map);
+      return L.circleMarker(swap(point), style);
 
     });
+
+    // Add feature group to map.
+    this.towns = L.featureGroup(features);
+    this.towns.addTo(this.map);
+
   },
 
 
