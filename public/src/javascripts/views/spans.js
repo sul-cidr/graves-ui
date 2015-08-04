@@ -35,7 +35,7 @@ export default View.extend({
    */
   publishHighlight: function(e) {
     let id = $(e.target).attr('data-id');
-    this.channels.global.trigger('highlight', id);
+    this.channels.global.trigger('highlight', Number(id));
   },
 
 
@@ -46,7 +46,7 @@ export default View.extend({
    */
   publishUnhighlight: function(e) {
     let id = $(e.target).attr('data-id');
-    this.channels.global.trigger('unhighlight', id);
+    this.channels.global.trigger('unhighlight', Number(id));
   },
 
 

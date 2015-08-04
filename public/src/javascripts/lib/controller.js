@@ -20,6 +20,7 @@ var Controller = function(options={}) {
 
   this._bindEvents();
   this._bindRequests();
+  this._initChannels();
 
 };
 
@@ -39,9 +40,9 @@ Controller.prototype._bindEvents = function() {
     let channel = Radio.channel(channelName);
 
     // Bind events -> callbacks.
-    for (let [event, method] of map) {
+    _.each(map, (method, event) => {
       channel.on(event, this[method], this);
-    }
+    });
 
   });
 
@@ -53,7 +54,7 @@ Controller.prototype._bindEvents = function() {
  */
 Controller.prototype._bindRequests = function() {
 
-  // Half if no requests.
+  // Halt if no requests.
   if (!_.isObject(this.requests)) return;
 
   // Error if no channel name..
@@ -68,6 +69,27 @@ Controller.prototype._bindRequests = function() {
   _.each(this.requests, (method, request) => {
     this.channel.reply(request, this[method], this);
   });
+
+};
+
+
+/**
+ * Cache channel connections.
+ */
+Controller.prototype._initChannels = function() {
+
+  // Halt if no channels.
+  if (!_.isArray(this.channels)) return;
+
+  var channels = {};
+
+  // Connect to channels.
+  for (let name of this.channels) {
+    channels[name] = Radio.channel(name);
+  }
+
+  // Replace the array.
+  this.channels = channels;
 
 };
 
