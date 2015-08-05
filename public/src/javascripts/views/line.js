@@ -40,7 +40,12 @@ export default View.extend({
     .transition()
     .duration(styles.transition.duration)
     .attr('x2', x2)
-    .attr('y2', y2);
+    .attr('y2', y2)
+    .each('end', () => {
+      this.svg.append('svg:circle').attr({
+        cx: x2, cy: y2, r: 5
+      });
+    });
 
   },
 
@@ -49,7 +54,8 @@ export default View.extend({
    * Clear the line.
    */
   hide: function() {
-    this.line.remove();
+    this.line.interrupt();
+    this.svg.selectAll('line, circle').remove();
   },
 
 

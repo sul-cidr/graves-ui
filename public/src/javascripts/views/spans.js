@@ -23,14 +23,6 @@ export default View.extend({
 
 
   /**
-   * Select spans, bind events.
-   */
-  initialize: function() {
-    // TODO
-  },
-
-
-  /**
    * Notify when the cursor enters a span.
    *
    * @param {Object} e

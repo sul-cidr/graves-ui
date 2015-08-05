@@ -92,8 +92,6 @@ export default View.extend({
     // Parse WKT -> GeoJSON.
     let features = data.map(b => {
 
-      console.log(b.id);
-
       // Extract the coordinates.
       let point = wellknown(b.geom).coordinates[0];
 
