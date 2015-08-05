@@ -4,7 +4,6 @@ import _ from 'lodash';
 import $ from 'jquery';
 import Backbone from 'backbone';
 import View from '../lib/view';
-import * as styles from './spans.yml';
 
 
 export default View.extend({
@@ -14,8 +13,8 @@ export default View.extend({
 
 
   events: {
-    'mouseenter span.burial': 'publishHover',
-    'mouseleave span.burial': 'publishBlur',
+    'mouseenter span.burial': 'publishHighlight',
+    'mouseleave span.burial': 'publishUnhighlight',
   },
 
 
@@ -27,8 +26,8 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  publishHover: function(e) {
-    this.channels.spans.trigger('hover', e);
+  publishHighlight: function(e) {
+    this.channels.spans.trigger('highlight', e);
   },
 
 
@@ -37,8 +36,8 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  publishBlur: function(e) {
-    this.channels.spans.trigger('blur');
+  publishUnhighlight: function(e) {
+    this.channels.spans.trigger('unhighlight');
   },
 
 

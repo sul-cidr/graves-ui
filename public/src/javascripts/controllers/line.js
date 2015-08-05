@@ -11,8 +11,8 @@ export default Controller.extend({
 
   events: {
     spans: {
-      hover: 'onHover',
-      blur: 'onBlur',
+      highlight: 'onHighlight',
+      unhighlight: 'onUnhighlight',
     }
   },
 
@@ -33,7 +33,7 @@ export default Controller.extend({
    *
    * @param {Object} e
    */
-  onHover: function(e) {
+  onHighlight: function(e) {
 
     let span = $(e.target);
 
@@ -55,7 +55,7 @@ export default Controller.extend({
   /**
    * Clear the line.
    */
-  onBlur: function() {
+  onUnhighlight: function() {
     this.view.hide();
   },
 
