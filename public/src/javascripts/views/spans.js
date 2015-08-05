@@ -13,8 +13,8 @@ export default View.extend({
 
 
   events: {
-    'mouseenter span.burial': 'publishHighlight',
-    'mouseleave span.burial': 'publishUnhighlight',
+    'mouseenter span.burial': 'onEnter',
+    'mouseleave span.burial': 'onLeave',
   },
 
 
@@ -26,8 +26,8 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  publishHighlight: function(e) {
-    this.channels.spans.trigger('highlight', e);
+  onEnter: function(e) {
+    this.channels.spans.trigger('enter', e);
   },
 
 
@@ -36,8 +36,8 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  publishUnhighlight: function(e) {
-    this.channels.spans.trigger('unhighlight');
+  onLeave: function(e) {
+    this.channels.spans.trigger('leave');
   },
 
 

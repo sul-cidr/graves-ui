@@ -11,8 +11,8 @@ export default Controller.extend({
 
   events: {
     spans: {
-      highlight: 'onHighlight',
-      unhighlight: 'onUnhighlight',
+      enter: 'onEnter',
+      leave: 'onLeave',
     }
   },
 
@@ -33,7 +33,7 @@ export default Controller.extend({
    *
    * @param {Object} e
    */
-  onHighlight: function(e) {
+  onEnter: function(e) {
 
     let span = $(e.target);
 
@@ -55,7 +55,7 @@ export default Controller.extend({
   /**
    * Clear the line.
    */
-  onUnhighlight: function() {
+  onLeave: function() {
     this.view.hide();
   },
 
