@@ -1,6 +1,7 @@
 
 
 import Controller from '../lib/controller';
+import Line from '../views/line';
 
 
 export default Controller.extend({
@@ -20,7 +21,7 @@ export default Controller.extend({
    * Start the view.
    */
   initialize: function() {
-    // TODO
+    this.view = new Line();
   },
 
 
@@ -31,11 +32,12 @@ export default Controller.extend({
    */
   onHighlight: function(id) {
 
-    // Get window-space offsets for the span and marker.
-    let tOffset = this.channels.spans.request('spanOffset', id);
-    let mOffset = this.channels.map.request('burialOffset', id);
+    // Get offsets for the span and marker.
+    let [x1, y1] = this.channels.spans.request('spanOffset', id);
+    let [x2, y2] = this.channels.map.request('burialOffset', id);
 
-    console.log(tOffset, mOffset);
+    // Render the line.
+    this.view.show(x1, y1, x2, y2);
 
   },
 
