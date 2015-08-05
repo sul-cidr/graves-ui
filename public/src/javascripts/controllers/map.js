@@ -42,7 +42,7 @@ export default Controller.extend({
    */
   _loadProvinces: function() {
     $.getJSON('provinces', (data) => {
-      this.view.plotProvinces(data);
+      this.view.ingestProvinces(data);
     });
   },
 
@@ -52,7 +52,7 @@ export default Controller.extend({
    */
   _loadBurials: function() {
     $.getJSON('burials', (data) => {
-      this.view.plotBurials(data);
+      this.view.ingestBurials(data);
     });
   },
 

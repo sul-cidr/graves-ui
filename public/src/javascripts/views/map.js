@@ -65,7 +65,7 @@ export default View.extend({
    *
    * @param {Object} data
    */
-  plotProvinces: function(data) {
+  ingestProvinces: function(data) {
 
     // Parse WKT -> GeoJSON.
     let features = data.map(c => {
@@ -88,7 +88,7 @@ export default View.extend({
    *
    * @param {Object} data
    */
-  plotBurials: function(data) {
+  ingestBurials: function(data) {
 
     this.idToBurial = {};
 
