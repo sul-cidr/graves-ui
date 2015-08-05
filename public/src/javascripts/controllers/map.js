@@ -13,7 +13,8 @@ export default Controller.extend({
 
   events: {
     global: {
-      select: 'onSelect'
+      highlight: 'onHighlight',
+      unhighlight: 'onUnhighlight',
     }
   },
 
@@ -57,12 +58,22 @@ export default Controller.extend({
 
 
   /**
-   * Focus on a burial site.
+   * Highlight a burial site.
    *
    * @param {Number} id
    */
-  onSelect: function(id) {
-    // TODO
+  onHighlight: function(id) {
+    this.view.highlight(id);
+  },
+
+
+  /**
+   * Unhighlight a burial site.
+   *
+   * @param {Number} id
+   */
+  onUnhighlight: function(id) {
+    this.view.unhighlight(id);
   },
 
 

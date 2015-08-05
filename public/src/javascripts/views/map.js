@@ -112,17 +112,7 @@ export default View.extend({
         closeButton: false
       });
 
-      // Highlight.
-      feature.on(
-        'mouseover',
-        this.highlightBurial.bind(this)
-      );
-
-      // Unhighlight.
-      feature.on(
-        'mouseout',
-        this.unhighlightBurial.bind(this)
-      );
+      // TODO: Bind hover/blur.
 
       // Map id -> feature.
       this.idToBurial[b.id] = feature;
@@ -144,22 +134,22 @@ export default View.extend({
   /**
    * Highlight a burial.
    *
-   * @param {Object} e
+   * @param {Number} id
    */
-  highlightBurial: function(e) {
-    e.target.setStyle(styles.burial.highlight);
-    e.target.openPopup();
+  highlight: function(id) {
+    let marker = this.idToBurial[id];
+    marker.setStyle(styles.burial.highlight);
   },
 
 
   /**
-   * Unhighlight a province.
+   * Unhighlight a burial.
    *
-   * @param {Object} e
+   * @param {Number} id
    */
-  unhighlightBurial: function(e) {
-    e.target.setStyle(styles.burial.default);
-    e.target.closePopup();
+  unhighlight: function(id) {
+    let marker = this.idToBurial[id];
+    marker.setStyle(styles.burial.default);
   },
 
 
