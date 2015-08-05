@@ -54,7 +54,7 @@ export default View.extend({
    * Clear the line.
    */
   hide: function() {
-    this.line.interrupt();
+    if (this.line) this.line.interrupt();
     this.svg.selectAll('line, circle').remove();
   },
 
