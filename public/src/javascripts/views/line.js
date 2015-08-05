@@ -3,6 +3,7 @@
 import d3 from 'd3';
 import Backbone from 'backbone';
 import View from '../lib/view';
+import * as styles from './line.yml';
 
 
 export default View.extend({
@@ -34,9 +35,10 @@ export default View.extend({
       x1: x1, y1: y1, x2: x1, y2: y1
     });
 
+    // Animate the line length.
     this.line
     .transition()
-    .duration(150)
+    .duration(styles.transition.duration)
     .attr('x2', x2)
     .attr('y2', y2);
 
