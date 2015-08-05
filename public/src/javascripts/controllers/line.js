@@ -1,5 +1,6 @@
 
 
+import $ from 'jquery';
 import Controller from '../lib/controller';
 import Line from '../views/line';
 
@@ -8,14 +9,14 @@ export default Controller.extend({
 
 
   events: {
-    global: {
-      highlight: 'onHighlight',
-      unhighlight: 'onUnhighlight',
+    spans: {
+      hover: 'onHover',
+      blur: 'onBlur',
     }
   },
 
 
-  channels: ['map', 'spans'],
+  channels: ['map'],
 
 
   /**
@@ -29,12 +30,19 @@ export default Controller.extend({
   /**
    * Render a line between the text and the map.
    *
-   * @param {Number} id
+   * @param {Object} e
    */
-  onHighlight: function(id) {
+  onHover: function(e) {
 
-    // Get offsets for the span and marker.
-    let [x1, y1] = this.channels.spans.request('spanOffset', id);
+    let span = $(e.target);
+
+    // Use top left corner as the anchor.
+    let offset = span.offset();
+    let x1 = offset.left + span.outerWidth() + 5;
+    let y1 = offset.top + 5;
+
+    // Get map offset.
+    let id = Number(span.attr('data-id'));
     let [x2, y2] = this.channels.map.request('burialOffset', id);
 
     // Render the line.
@@ -46,7 +54,7 @@ export default Controller.extend({
   /**
    * Clear the line.
    */
-  onUnhighlight: function() {
+  onBlur: function() {
     this.view.hide();
   },
 

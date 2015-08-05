@@ -14,12 +14,12 @@ export default View.extend({
 
 
   events: {
-    'mouseenter span.burial': 'publishHighlight',
-    'mouseleave span.burial': 'publishUnhighlight',
+    'mouseenter span.burial': 'publishHover',
+    'mouseleave span.burial': 'publishBlur',
   },
 
 
-  channels: ['global'],
+  channels: ['spans'],
 
 
   /**
@@ -27,9 +27,8 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  publishHighlight: function(e) {
-    let id = $(e.target).attr('data-id');
-    this.channels.global.trigger('highlight', Number(id));
+  publishHover: function(e) {
+    this.channels.spans.trigger('hover', e);
   },
 
 
@@ -38,28 +37,8 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  publishUnhighlight: function(e) {
-    let id = $(e.target).attr('data-id');
-    this.channels.global.trigger('unhighlight', Number(id));
-  },
-
-
-  /**
-   * Get the window-space offset of a span.
-   *
-   * @param {Number} id
-   */
-  getSpanOffset: function(id) {
-
-    let span = $(`[data-id=${id}]`);
-    let offset = span.offset();
-
-    // Use the top left corner as the anchor.
-    let x = offset.left + span.outerWidth() + styles.offset.padding;
-    let y = offset.top + styles.offset.padding;
-
-    return [x, y];
-
+  publishBlur: function(e) {
+    this.channels.spans.trigger('blur');
   },
 
 
