@@ -1,5 +1,13 @@
 ---
 
+# TODO: Where to focus?
+viewport:
+  focus: [30, 115]
+  zoom: 5
+
+selection:
+  zoom: 8
+
 town:
   radius: 2
   fillColor: red

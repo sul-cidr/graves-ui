@@ -54,8 +54,11 @@ export default View.extend({
 
     this.map.addLayer(osmLayer);
 
-    // TODO: Where to focus?
-    this.map.setView([30, 110], 5);
+    // Default viewport.
+    this.map.setView(
+      styles.viewport.focus,
+      styles.viewport.zoom
+    );
 
   },
 
@@ -201,7 +204,7 @@ export default View.extend({
    */
   select: function(id) {
     let marker = this.idToSite[id];
-    this.map.flyTo(marker.getLatLng(), 8);
+    this.map.flyTo(marker.getLatLng(), styles.selection.zoom);
   },
 
 
