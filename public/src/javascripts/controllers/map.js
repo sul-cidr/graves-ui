@@ -15,6 +15,7 @@ export default Controller.extend({
     global: {
       highlight: 'onHighlight',
       unhighlight: 'onUnhighlight',
+      select: 'onSelect',
     }
   },
 
@@ -74,6 +75,16 @@ export default Controller.extend({
    */
   onUnhighlight: function(id) {
     this.view.unhighlight(id);
+  },
+
+
+  /**
+   * Focus on a burial site.
+   *
+   * @param {Number} id
+   */
+  onSelect: function(id) {
+    this.view.select(id);
   },
 
 

@@ -194,6 +194,17 @@ export default View.extend({
   },
 
 
+  /**
+   * Focus on a burial.
+   *
+   * @param {Number} id
+   */
+  select: function(id) {
+    let marker = this.idToSite[id];
+    this.map.flyTo(marker.getLatLng(), 8);
+  },
+
+
   // ** Helpers
 
 
