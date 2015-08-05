@@ -144,6 +144,12 @@ export default View.extend({
       this.onUnhighlight.bind(this)
     );
 
+    // Select.
+    this.sites.on(
+      'click',
+      this.onSelect.bind(this)
+    );
+
   },
 
 
@@ -156,8 +162,8 @@ export default View.extend({
    * @param {Object} e
    */
   onHighlight: function(e) {
-    e.layer.openPopup();
     this.channels.global.trigger('highlight', e.layer.options.id);
+    e.layer.openPopup();
   },
 
 
@@ -167,8 +173,18 @@ export default View.extend({
    * @param {Object} e
    */
   onUnhighlight: function(e) {
-    e.layer.closePopup();
     this.channels.global.trigger('unhighlight', e.layer.options.id);
+    e.layer.closePopup();
+  },
+
+
+  /**
+   * When a burial is clicked.
+   *
+   * @param {Object} e
+   */
+  onSelect: function(e) {
+    this.channels.global.trigger('select', e.layer.options.id);
   },
 
 
