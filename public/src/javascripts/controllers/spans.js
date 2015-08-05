@@ -43,9 +43,11 @@ export default Controller.extend({
 
   /**
    * Clear highlights.
+   *
+   * @param {Number} id
    */
-  onUnhighlight: function() {
-    this.view.unhighlight();
+  onUnhighlight: function(id) {
+    this.view.unhighlight(id);
   },
 
 

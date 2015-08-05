@@ -15,6 +15,7 @@ export default View.extend({
   events: {
     'mouseenter span.burial': 'onSpanEnter',
     'mouseleave span.burial': 'onSpanLeave',
+    'click span.burial': 'onSpanClick',
   },
 
 
@@ -38,15 +39,9 @@ export default View.extend({
    * @param {Object} e
    */
   onSpanEnter: function(e) {
-
     let id = this.getIdFromEvent(e);
-
-    // Emit the generic burial highlight.
     this.channels.global.trigger('highlight', id);
-
-    // Emit the raw DOM event.
     this.channels.spans.trigger('enter', e);
-
   },
 
 
@@ -56,7 +51,19 @@ export default View.extend({
    * @param {Object} e
    */
   onSpanLeave: function(e) {
-    this.channels.global.trigger('unhighlight');
+    let id = this.getIdFromEvent(e);
+    this.channels.global.trigger('unhighlight', id);
+  },
+
+
+  /**
+   * When a span is clicked.
+   *
+   * @param {Object} e
+   */
+  onSpanClick: function(e) {
+    let id = this.getIdFromEvent(e);
+    this.channels.global.trigger('select', id);
   },
 
 
@@ -79,7 +86,7 @@ export default View.extend({
    * @param {Number} id
    */
   unhighlight: function(id) {
-    this.spans.removeClass('highlight');
+    this.getSpansWithId(id).removeClass('highlight');
   },
 
 
