@@ -57,6 +57,9 @@ export default View.extend({
   },
 
 
+  // ** Features:
+
+
   /**
    * Plot provinces.
    *
@@ -135,6 +138,9 @@ export default View.extend({
   },
 
 
+  // ** Renderers:
+
+
   /**
    * Highlight a burial.
    *
@@ -155,6 +161,9 @@ export default View.extend({
     e.target.setStyle(styles.burial.default);
     e.target.closePopup();
   },
+
+
+  // ** Helpers
 
 
   /**

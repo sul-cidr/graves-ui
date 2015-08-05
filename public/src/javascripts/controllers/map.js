@@ -11,6 +11,13 @@ export default Controller.extend({
   channel: 'map',
 
 
+  events: {
+    global: {
+      select: 'onSelect'
+    }
+  },
+
+
   requests: {
     burialOffset: 'getBurialOffset',
   },
@@ -50,7 +57,17 @@ export default Controller.extend({
 
 
   /**
-   * Given a burial id, get the window-space offset of the marker.
+   * Focus on a burial site.
+   *
+   * @param {Number} id
+   */
+  onSelect: function(id) {
+    // TODO
+  },
+
+
+  /**
+   * Get the window-space offset of a burial marker.
    *
    * @param {Number} id
    */
