@@ -3,6 +3,7 @@
 import $ from 'jquery';
 import Controller from '../lib/controller';
 import Line from '../views/line';
+import * as styles from './line.yml'
 
 
 export default Controller.extend({
@@ -38,8 +39,8 @@ export default Controller.extend({
 
     // Use top left corner as the anchor.
     let offset = span.offset();
-    let x1 = offset.left + span.outerWidth() + 5;
-    let y1 = offset.top + 5;
+    let x1 = offset.left + span.outerWidth() + styles.padding;
+    let y1 = offset.top + styles.padding;
 
     // Get map offset.
     let id = Number(span.attr('data-id'));
