@@ -26,13 +26,21 @@
   }
 
   span.burial {
+
     background: darken(white, 15%);
     padding: 0 3px;
     cursor: pointer;
-    &:hover {
-      background: @color-hl;
+
+    &.highlight {
+      background: @color-highlight;
       color: white;
     }
+
+    &.select {
+      background: @color-select;
+      color: white;
+    }
+
   }
 
 }

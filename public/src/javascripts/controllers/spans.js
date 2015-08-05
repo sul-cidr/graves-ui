@@ -14,6 +14,8 @@ export default Controller.extend({
     global: {
       highlight: 'onHighlight',
       unhighlight: 'onUnhighlight',
+      select: 'onSelect',
+      unselect: 'onUnselect',
     }
   },
 
@@ -34,7 +36,7 @@ export default Controller.extend({
   /**
    * Highlight spans for the highlighted burial.
    *
-   * @param {Number} id - Burial ID.
+   * @param {Number} id
    */
   onHighlight: function(id) {
     this.view.highlight(id);
@@ -42,19 +44,35 @@ export default Controller.extend({
 
 
   /**
-   * Remove highlights.
-   *
-   * @param {Number} id - Burial ID.
+   * Clear highlights.
    */
-  onUnhighlight: function(id) {
-    this.view.unhighlight(id);
+  onUnhighlight: function() {
+    this.view.unhighlight();
+  },
+
+
+  /**
+   * Select spans for the highlighted burial.
+   *
+   * @param {Number} id
+   */
+  onSelect: function(id) {
+    this.view.select(id);
+  },
+
+
+  /**
+   * Clear selections.
+   */
+  onUnselect: function(id) {
+    this.view.unselect();
   },
 
 
   /**
    * Get the window-space offset for a burial marker.
    *
-   * @param {Number} id - Burial ID.
+   * @param {Number} id
    */
   getSpanOffset: function(id) {
     return this.view.getSpanOffset(id);

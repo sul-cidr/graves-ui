@@ -13,13 +13,22 @@ export default View.extend({
 
 
   events: {
-    'mouseenter span.burial': 'onEnter',
-    'mouseleave span.burial': 'onLeave',
-    'click span.burial': 'onClick',
+    'mouseenter span.burial': 'onSpanEnter',
+    'mouseleave span.burial': 'onSpanLeave',
+    'click span.burial': 'onSpanClick',
+    'click': 'onTextClick',
   },
 
 
   channels: ['spans', 'global'],
+
+
+  /**
+   * Select spans.
+   */
+  initialize: function() {
+    this.spans = this.$('span.burial');
+  },
 
 
   // ** Publishers:
@@ -30,7 +39,7 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onEnter: function(e) {
+  onSpanEnter: function(e) {
 
     let id = this.getIdFromEvent(e);
 
@@ -48,9 +57,8 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onLeave: function(e) {
-    let id = this.getIdFromEvent(e);
-    this.channels.global.trigger('unhighlight', id);
+  onSpanLeave: function(e) {
+    this.channels.global.trigger('unhighlight');
   },
 
 
@@ -59,8 +67,27 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onClick: function(e) {
-    console.log(e);
+  onSpanClick: function(e) {
+
+    let id = this.getIdFromEvent(e);
+
+    // Trigger the selection.
+    this.channels.global.trigger('unselect');
+    this.channels.global.trigger('select', id);
+
+    // Swallow the event, to prevent click-off.
+    e.stopPropagation();
+
+  },
+
+
+  /**
+   * When the container is clicked.
+   *
+   * @param {Object} e
+   */
+  onTextClick: function(e) {
+    this.channels.global.trigger('unselect');
   },
 
 
@@ -70,20 +97,40 @@ export default View.extend({
   /**
    * Highlight spans for a burial.
    *
-   * @param {Number} id - Burial ID.
+   * @param {Number} id
    */
   highlight: function(id) {
-    this.getSpansWithId(id).addClass('highlighted');
+    this.getSpansWithId(id).addClass('highlight');
   },
 
 
   /**
    * Unhighlight spans.
    *
-   * @param {Number} id - Burial ID.
+   * @param {Number} id
    */
   unhighlight: function(id) {
-    this.getSpansWithId(id).removeClass('highlighted');
+    this.spans.removeClass('highlight');
+  },
+
+
+  /**
+   * Select spans for a burial.
+   *
+   * @param {Number} id
+   */
+  select: function(id) {
+    this.getSpansWithId(id).addClass('select');
+  },
+
+
+  /**
+   * Select spans for a burial.
+   *
+   * @param {Number} id
+   */
+  unselect: function(id) {
+    this.spans.removeClass('select');
   },
 
 
