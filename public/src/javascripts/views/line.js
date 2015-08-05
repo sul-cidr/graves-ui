@@ -36,6 +36,7 @@ export default View.extend({
 
     this.line
     .transition()
+    .duration(150)
     .attr('x2', x2)
     .attr('y2', y2);
 

@@ -92,6 +92,8 @@ export default View.extend({
     // Parse WKT -> GeoJSON.
     let features = data.map(b => {
 
+      console.log(b.id);
+
       // Extract the coordinates.
       let point = wellknown(b.geom).coordinates[0];
 
@@ -168,7 +170,10 @@ export default View.extend({
     let latLng = this.idToBurial[id].getLatLng();
 
     // Coordinate -> layer point.
-    let point = this.map.latLngToLayerPoint(latLng);
+    let layerPoint = this.map.latLngToLayerPoint(latLng);
+
+    // Coordinate -> layer point.
+    let point = this.map.layerPointToContainerPoint(layerPoint);
 
     return [point.x, point.y];
 
