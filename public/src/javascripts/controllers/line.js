@@ -11,8 +11,10 @@ export default Controller.extend({
 
   events: {
     spans: {
-      enter: 'onEnter',
-      leave: 'onLeave',
+      enter: 'onEnter'
+    },
+    global: {
+      unhighlight: 'onLeave'
     }
   },
 
