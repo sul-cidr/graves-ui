@@ -30,10 +30,23 @@ export default View.extend({
   show: function(x1, y1, x2, y2) {
 
     // Inject the <line>.
-    this.svg.append('svg:line').attr({
-      x1: x1, y1: y1, x2: x2, y2: y2
+    this.line = this.svg.append('svg:line').attr({
+      x1: x1, y1: y1, x2: x1, y2: y1
     });
 
+    this.line
+    .transition()
+    .attr('x2', x2)
+    .attr('y2', y2);
+
+  },
+
+
+  /**
+   * Clear the line.
+   */
+  hide: function() {
+    this.line.remove();
   },
 
 

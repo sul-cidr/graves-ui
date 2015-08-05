@@ -9,7 +9,8 @@ export default Controller.extend({
 
   events: {
     global: {
-      highlight: 'onHighlight'
+      highlight: 'onHighlight',
+      unhighlight: 'onUnhighlight',
     }
   },
 
@@ -39,6 +40,14 @@ export default Controller.extend({
     // Render the line.
     this.view.show(x1, y1, x2, y2);
 
+  },
+
+
+  /**
+   * Clear the line.
+   */
+  onUnhighlight: function() {
+    this.view.hide();
   },
 
 
