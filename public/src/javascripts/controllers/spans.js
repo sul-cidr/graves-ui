@@ -14,8 +14,6 @@ export default Controller.extend({
     global: {
       highlight: 'onHighlight',
       unhighlight: 'onUnhighlight',
-      select: 'onSelect',
-      unselect: 'onUnselect',
     }
   },
 
@@ -48,24 +46,6 @@ export default Controller.extend({
    */
   onUnhighlight: function() {
     this.view.unhighlight();
-  },
-
-
-  /**
-   * Select spans for the highlighted burial.
-   *
-   * @param {Number} id
-   */
-  onSelect: function(id) {
-    this.view.select(id);
-  },
-
-
-  /**
-   * Clear selections.
-   */
-  onUnselect: function(id) {
-    this.view.unselect();
   },
 
 

@@ -15,8 +15,6 @@ export default View.extend({
   events: {
     'mouseenter span.burial': 'onSpanEnter',
     'mouseleave span.burial': 'onSpanLeave',
-    'click span.burial': 'onSpanClick',
-    'click': 'onTextClick',
   },
 
 
@@ -62,35 +60,6 @@ export default View.extend({
   },
 
 
-  /**
-   * When a span is clicked.
-   *
-   * @param {Object} e
-   */
-  onSpanClick: function(e) {
-
-    let id = this.getIdFromEvent(e);
-
-    // Trigger the selection.
-    this.channels.global.trigger('unselect');
-    this.channels.global.trigger('select', id);
-
-    // Swallow the event, to prevent click-off.
-    e.stopPropagation();
-
-  },
-
-
-  /**
-   * When the container is clicked.
-   *
-   * @param {Object} e
-   */
-  onTextClick: function(e) {
-    this.channels.global.trigger('unselect');
-  },
-
-
   // ** Renderers:
 
 
@@ -111,26 +80,6 @@ export default View.extend({
    */
   unhighlight: function(id) {
     this.spans.removeClass('highlight');
-  },
-
-
-  /**
-   * Select spans for a burial.
-   *
-   * @param {Number} id
-   */
-  select: function(id) {
-    this.getSpansWithId(id).addClass('select');
-  },
-
-
-  /**
-   * Select spans for a burial.
-   *
-   * @param {Number} id
-   */
-  unselect: function(id) {
-    this.spans.removeClass('select');
   },
 
 
