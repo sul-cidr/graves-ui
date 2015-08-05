@@ -15,14 +15,15 @@ export default View.extend({
   events: {
     'mouseenter span.burial': 'onEnter',
     'mouseleave span.burial': 'onLeave',
+    'click span.burial': 'onClick',
   },
 
 
-  channels: ['spans'],
+  channels: ['spans', 'global'],
 
 
   /**
-   * Notify when the cursor enters a span.
+   * When the cursor enters a span.
    *
    * @param {Object} e
    */
@@ -32,12 +33,22 @@ export default View.extend({
 
 
   /**
-   * Notify when the cursor leaves a span.
+   * When the cursor leaves a span.
    *
    * @param {Object} e
    */
   onLeave: function(e) {
     this.channels.spans.trigger('leave');
+  },
+
+
+  /**
+   * When a span is clicked.
+   *
+   * @param {Object} e
+   */
+  onClick: function(e) {
+    console.log(e);
   },
 
 
