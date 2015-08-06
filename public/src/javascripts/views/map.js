@@ -18,7 +18,7 @@ export default View.extend({
   el: '#map',
 
 
-  channels: ['global'],
+  channels: ['map', 'global'],
 
 
   /**
@@ -26,6 +26,7 @@ export default View.extend({
    */
   initialize: function() {
     this._initLeaflet();
+    this._initEvents();
   },
 
 
@@ -59,6 +60,18 @@ export default View.extend({
       styles.viewport.focus,
       styles.viewport.zoom
     );
+
+  },
+
+
+  /**
+   * Bind map-level events.
+   */
+  _initEvents: function() {
+
+    this.map.on('move', () => {
+      this.channels.map.trigger('move');
+    });
 
   },
 

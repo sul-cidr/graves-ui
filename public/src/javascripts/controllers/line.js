@@ -10,12 +10,19 @@ export default Controller.extend({
 
 
   events: {
+
     spans: {
       enter: 'onShow'
     },
+
     global: {
       unhighlight: 'onHide'
-    }
+    },
+
+    map: {
+      move: 'onMove'
+    },
+
   },
 
 
@@ -31,7 +38,7 @@ export default Controller.extend({
 
 
   /**
-   * Render a line between the text and the map.
+   * Add a text -> map line.
    *
    * @param {Object} e
    */
@@ -45,6 +52,14 @@ export default Controller.extend({
    */
   onHide: function() {
     this.view.hide();
+  },
+
+
+  /**
+   * Reposition the line.
+   */
+  onMove: function() {
+    this.view.render();
   },
 
 
