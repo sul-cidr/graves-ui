@@ -1,5 +1,6 @@
 
 
+import $ from 'jquery';
 import d3 from 'd3';
 import Backbone from 'backbone';
 import View from '../lib/view';
@@ -12,6 +13,9 @@ export default View.extend({
   el: '#line',
 
 
+  channels: ['map'],
+
+
   /**
    * Inject the SVG container.
    */
@@ -21,30 +25,49 @@ export default View.extend({
 
 
   /**
-   * Render the line.
+   * Inject the line.
    *
-   * @param {Number} x1
-   * @param {Number} y1
-   * @param {Number} x2
-   * @param {Number} y2
+   * @param {Object} e
    */
-  show: function(x1, y1, x2, y2) {
+  show: function(e) {
 
-    // Inject the <line>.
-    this.line = this.svg.append('svg:line').attr({
-      x1: x1, y1: y1, x2: x1, y2: y1
+    this.span = $(e.target);
+    this.id = this.span.attr('data-id');
+
+    // The dot at the end.
+    this.dot = this.svg.append('svg:circle').attr({ r: 5 });
+
+    // The text -> map line.
+    this.line = this.svg.append('svg:line');
+
+    this.render();
+
+  },
+
+
+  /**
+   * Position the line.
+   */
+  render: function() {
+
+    // Span offset.
+    let offset = this.span.offset();
+    let x1 = offset.left + this.span.outerWidth() + styles.padding;
+    let y1 = offset.top + styles.padding;
+
+    // Map offset.
+    let [x2, y2] = this.channels.map.request('burialOffset', this.id);
+
+    this.line.attr({
+      x1: x1,
+      y1: y1,
+      x2: x2,
+      y2: y2
     });
 
-    // Animate the line length.
-    this.line
-    .transition()
-    .duration(styles.transition.duration)
-    .attr('x2', x2)
-    .attr('y2', y2)
-    .each('end', () => {
-      this.svg.append('svg:circle').attr({
-        cx: x2, cy: y2, r: 5
-      });
+    this.dot.attr({
+      cx: x2,
+      cy: y2
     });
 
   },

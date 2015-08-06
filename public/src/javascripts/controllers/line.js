@@ -36,21 +36,7 @@ export default Controller.extend({
    * @param {Object} e
    */
   onShow: function(e) {
-
-    let span = $(e.target);
-
-    // Use top left corner as the anchor.
-    let offset = span.offset();
-    let x1 = offset.left + span.outerWidth() + styles.padding;
-    let y1 = offset.top + styles.padding;
-
-    // Get map offset.
-    let id = Number(span.attr('data-id'));
-    let [x2, y2] = this.channels.map.request('burialOffset', id);
-
-    // Render the line.
-    this.view.show(x1, y1, x2, y2);
-
+    this.view.show(e);
   },
 
 
