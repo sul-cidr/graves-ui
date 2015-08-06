@@ -2,7 +2,6 @@
 
 import _ from 'lodash';
 import $ from 'jquery';
-import Backbone from 'backbone';
 import L from 'leaflet';
 import wellknown from 'wellknown';
 import * as omnivore from 'leaflet-omnivore'

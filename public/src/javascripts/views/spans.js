@@ -2,7 +2,6 @@
 
 import _ from 'lodash';
 import $ from 'jquery';
-import Backbone from 'backbone';
 import View from '../lib/view';
 
 

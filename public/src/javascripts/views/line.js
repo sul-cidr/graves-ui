@@ -2,7 +2,6 @@
 
 import $ from 'jquery';
 import d3 from 'd3';
-import Backbone from 'backbone';
 import View from '../lib/view';
 import * as styles from './line.yml';
 
