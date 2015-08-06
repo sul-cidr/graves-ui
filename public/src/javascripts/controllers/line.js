@@ -56,10 +56,10 @@ export default Controller.extend({
 
 
   /**
-   * Reposition the line.
+   * Update the line.
    */
   onMove: function() {
-    this.view.render();
+    this.view.update();
   },
 
 

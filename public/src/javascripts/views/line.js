@@ -21,6 +21,7 @@ export default View.extend({
    */
   initialize: function() {
     this.svg = d3.select(this.el).append('svg:svg');
+    this.active = false;
   },
 
 
@@ -31,16 +32,20 @@ export default View.extend({
    */
   show: function(e) {
 
+    // Wrap the text span.
     this.span = $(e.target);
+
+    // Cache the burial id.
     this.id = this.span.attr('data-id');
 
-    // The dot at the end.
-    this.dot = this.svg.append('svg:circle').attr({ r: 5 });
-
-    // The text -> map line.
+    // Inject the <line>.
     this.line = this.svg.append('svg:line');
 
-    this.render();
+    // Inject the <circle>.
+    this.dot = this.svg.append('svg:circle').attr({ r: 5 });
+
+    this.active = true;
+    this.update();
 
   },
 
@@ -48,9 +53,9 @@ export default View.extend({
   /**
    * Position the line.
    */
-  render: function() {
+  update: function() {
 
-    if (!this.span) return;
+    if (!this.active) return;
 
     // Span offset.
     let offset = this.span.offset();
@@ -80,7 +85,7 @@ export default View.extend({
    */
   hide: function() {
     this.svg.selectAll('line, circle').remove();
-    this.span = null;
+    this.active = false;
   },
 
 
