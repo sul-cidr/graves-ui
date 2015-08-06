@@ -1,3 +1,3 @@
-## Chinese Graves - UI Mockups
+## Chinese Graves
 
-Mockups for the Chinese Graves spatial narratives.
+Exploratory development for the Chinese Graves spatial narratives.
