@@ -50,6 +50,8 @@ export default View.extend({
    */
   render: function() {
 
+    if (!this.span) return;
+
     // Span offset.
     let offset = this.span.offset();
     let x1 = offset.left + this.span.outerWidth() + styles.padding;
@@ -77,8 +79,8 @@ export default View.extend({
    * Clear the line.
    */
   hide: function() {
-    if (this.line) this.line.interrupt();
     this.svg.selectAll('line, circle').remove();
+    this.span = null;
   },
 
 
