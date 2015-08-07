@@ -10,7 +10,7 @@
   padding: 1em 2em;
   overflow: scroll;
 
-  background: rgba(245,245,245,0.8);
+  background: rgba(245,245,245,0.9);
   z-index: @zindex-map+1;
 
   h1, h3 {
@@ -32,9 +32,10 @@
     line-height: 22px;
   }
 
-  span.burial {
+  .burial {
 
-    background: darken(white, 15%);
+    /*background: darken(white, 15%);*/
+    border-bottom: 2px solid lighten(black, 30%);
     padding: 0 3px;
     cursor: pointer;
 
