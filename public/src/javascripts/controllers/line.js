@@ -1,9 +1,7 @@
 
 
-import $ from 'jquery';
 import Controller from '../lib/controller';
 import Line from '../views/line';
-import * as styles from './line.yml'
 
 
 export default Controller.extend({
