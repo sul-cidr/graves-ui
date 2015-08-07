@@ -20,7 +20,6 @@ export default View.extend({
    */
   initialize: function() {
     this.svg = d3.select(this.el).append('svg:svg');
-    this.active = false;
   },
 
 
@@ -31,11 +30,8 @@ export default View.extend({
    */
   show: function(e) {
 
-    // Cache DOM touches.
-    this.span   = $(e.target);
-    this.id     = this.span.attr('data-id');
-    this.offset = this.span.offset();
-    this.width  = this.span.outerWidth();
+    // Wrap the span.
+    this.span = $(e.target);
 
     // Inject the <line>.
     this.line = this.svg.append('svg:line');
@@ -45,7 +41,6 @@ export default View.extend({
       r: styles.radius
     });
 
-    this.active = true;
     this.update();
 
   },
@@ -56,14 +51,20 @@ export default View.extend({
    */
   update: function() {
 
-    if (!this.active) return;
+    if (!this.span) return;
+
+    let w = this.span.outerWidth();
+    let o = this.span.offset();
 
     // Span offset.
-    let x1 = this.offset.left + this.width + styles.padding;
-    let y1 = this.offset.top + styles.padding;
+    let x1 = o.left + w + styles.padding;
+    let y1 = o.top + styles.padding;
 
     // Map offset.
-    let [x2, y2] = this.channels.map.request('burialOffset', this.id);
+    let [x2, y2] = this.channels.map.request(
+      'burialOffset',
+      this.span.attr('data-id')
+    );
 
     this.line.attr({
       x1: x1,
@@ -85,7 +86,7 @@ export default View.extend({
    */
   hide: function() {
     this.svg.selectAll('*').remove();
-    this.active = false;
+    this.span = null;
   },
 
 
