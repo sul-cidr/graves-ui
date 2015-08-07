@@ -28,10 +28,10 @@ export default Controller.extend({
 
 
   /**
-   * Start the view.
+   * By default, no line.
    */
   initialize: function() {
-    this.view = new Line();
+    this.view = null;
   },
 
 
@@ -41,7 +41,16 @@ export default Controller.extend({
    * @param {Object} e
    */
   onShow: function(e) {
-    this.view.show(e);
+    this.view = new Line({ event: e });
+    this.view.show();
+  },
+
+
+  /**
+   * Update the position.
+   */
+  onMove: function() {
+    if (this.view) this.view.update();
   },
 
 
@@ -50,14 +59,7 @@ export default Controller.extend({
    */
   onHide: function() {
     this.view.hide();
-  },
-
-
-  /**
-   * Update the line.
-   */
-  onMove: function() {
-    this.view.update();
+    this.view = null;
   },
 
 

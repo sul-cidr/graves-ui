@@ -9,35 +9,35 @@ import * as styles from './line.yml';
 export default View.extend({
 
 
-  el: '#line',
-
-
   channels: ['map'],
 
 
   /**
-   * Inject the SVG container.
+   * Select the span, cache id / offset / width.
+   *
+   * @param {Object} options
    */
-  initialize: function() {
-    this.svg = d3.select(this.el).append('svg:svg');
+  initialize: function(options) {
+    this.span   = $(options.event.target);
+    this.id     = this.span.attr('data-id');
+    this.offset = this.span.offset();
+    this.width  = this.span.outerWidth();
   },
 
 
   /**
-   * Inject the line.
-   *
-   * @param {Object} e
+   * Inject line components.
    */
-  show: function(e) {
+  show: function() {
 
-    // Wrap the span.
-    this.span = $(e.target);
+    // Top-level <g>.
+    this.group = d3.select('svg#line').append('svg:g');
 
-    // Inject the <line>.
-    this.line = this.svg.append('svg:line');
+    // Text -> map <line>.
+    this.line = this.group.append('svg:line');
 
-    // Inject the <circle>.
-    this.dot = this.svg.append('svg:circle').attr({
+    // <circle> on map marker.
+    this.dot = this.group.append('svg:circle').attr({
       r: styles.radius
     });
 
@@ -51,19 +51,13 @@ export default View.extend({
    */
   update: function() {
 
-    if (!this.span) return;
-
-    let w = this.span.outerWidth();
-    let o = this.span.offset();
-
     // Span offset.
-    let x1 = o.left + w + styles.padding;
-    let y1 = o.top + styles.padding;
+    let x1 = this.offset.left + this.width + styles.padding;
+    let y1 = this.offset.top + styles.padding;
 
     // Map offset.
     let [x2, y2] = this.channels.map.request(
-      'burialOffset',
-      this.span.attr('data-id')
+      'burialOffset', this.id
     );
 
     this.line.attr({
@@ -85,8 +79,7 @@ export default View.extend({
    * Clear the line.
    */
   hide: function() {
-    this.svg.selectAll('*').remove();
-    this.span = null;
+    this.group.remove();
   },
 
 
