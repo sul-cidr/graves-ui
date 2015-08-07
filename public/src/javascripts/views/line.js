@@ -82,7 +82,7 @@ export default View.extend({
    * Clear the line.
    */
   hide: function() {
-    this.svg.selectAll('line, circle').remove();
+    this.svg.selectAll('*').remove();
     this.active = false;
   },
 
