@@ -50,7 +50,9 @@ export default Controller.extend({
    * Update the position.
    */
   onMove: function() {
-    if (this.view) this.view.update();
+    if (this.view) {
+      this.view.update();
+    }
   },
 
 
@@ -58,8 +60,10 @@ export default Controller.extend({
    * Clear the line.
    */
   onHide: function() {
-    this.view.hide();
-    this.view = null;
+    if (this.view) {
+      this.view.hide();
+      this.view = null;
+    }
   },
 
 
