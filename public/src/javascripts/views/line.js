@@ -31,11 +31,11 @@ export default View.extend({
    */
   show: function(e) {
 
-    // Wrap the text span.
-    this.span = $(e.target);
-
-    // Cache the burial id.
-    this.id = this.span.attr('data-id');
+    // Cache DOM touches.
+    this.span   = $(e.target);
+    this.id     = this.span.attr('data-id');
+    this.offset = this.span.offset();
+    this.width  = this.span.outerWidth();
 
     // Inject the <line>.
     this.line = this.svg.append('svg:line');
@@ -57,9 +57,8 @@ export default View.extend({
     if (!this.active) return;
 
     // Span offset.
-    let offset = this.span.offset();
-    let x1 = offset.left + this.span.outerWidth() + styles.padding;
-    let y1 = offset.top + styles.padding;
+    let x1 = this.offset.left + this.width + styles.padding;
+    let y1 = this.offset.top + styles.padding;
 
     // Map offset.
     let [x2, y2] = this.channels.map.request('burialOffset', this.id);
