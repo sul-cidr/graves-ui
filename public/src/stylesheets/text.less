@@ -10,7 +10,7 @@
   padding: 1em 2em;
   overflow: scroll;
 
-  background: rgba(245,245,245,0.9);
+  background: rgba(245,245,245,0.95);
   z-index: @zindex-map+1;
 
   h1, h3 {
@@ -34,7 +34,6 @@
 
   .burial {
 
-    /*background: darken(white, 15%);*/
     border-bottom: 2px solid lighten(black, 30%);
     padding: 0 3px;
     cursor: pointer;
@@ -42,6 +41,20 @@
     &.highlight {
       background: lighten(black, 30%);
       color: white;
+    }
+
+  }
+
+  .section {
+
+    opacity: 0.3;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+      .heading {
+        color: @color-highlight;
+      }
     }
 
   }

@@ -51,7 +51,7 @@ export default View.extend({
 
     // OSM base layer.
     let osmLayer = L.tileLayer(
-      '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      '//{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
       { detectRetina: true }
     );
 
