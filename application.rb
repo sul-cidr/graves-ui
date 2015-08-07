@@ -5,19 +5,11 @@ require 'require_all'
 require 'json'
 require 'slim'
 require 'slim/include'
-require 'redcarpet'
 
 require_rel 'environment'
 
 configure do
   set :views, "#{File.dirname(__FILE__)}/views"
-end
-
-helpers do
-  def markdown(path)
-    md = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    md.render(File.read(File.join(settings.views, path)))
-  end
 end
 
 get '/' do
