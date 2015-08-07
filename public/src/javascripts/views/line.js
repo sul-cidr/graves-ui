@@ -41,7 +41,9 @@ export default View.extend({
     this.line = this.svg.append('svg:line');
 
     // Inject the <circle>.
-    this.dot = this.svg.append('svg:circle').attr({ r: 5 });
+    this.dot = this.svg.append('svg:circle').attr({
+      r: styles.radius
+    });
 
     this.active = true;
     this.update();
