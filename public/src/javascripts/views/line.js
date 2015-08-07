@@ -30,20 +30,8 @@ export default View.extend({
    * Inject line components.
    */
   show: function() {
-
-    // Top-level <g>.
-    this.group = d3.select('svg#line').append('svg:g');
-
-    // Text -> map <line>.
-    this.line = this.group.append('svg:line');
-
-    // <circle> on map marker.
-    this.dot = this.group.append('svg:circle').attr({
-      r: styles.radius
-    });
-
+    this.line = d3.select('#line').append('svg:line');
     this.update();
-
   },
 
 
@@ -74,11 +62,6 @@ export default View.extend({
       y2: y2
     });
 
-    this.dot.attr({
-      cx: x2,
-      cy: y2
-    });
-
   },
 
 
@@ -86,7 +69,7 @@ export default View.extend({
    * Clear the line.
    */
   hide: function() {
-    this.group.remove();
+    this.line.remove();
   },
 
 

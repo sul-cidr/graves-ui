@@ -33,7 +33,13 @@ burial:
 sections:
 
   - label: First Section
-    xmin: 108
-    ymin: 18.4
+    xmin: 107.7
+    ymin: 18.2
     xmax: 111.5
     ymax: 23.3
+
+  - label: Second Section
+    xmin: 103.7
+    ymin: 24.8
+    xmax: 109
+    ymax: 28
