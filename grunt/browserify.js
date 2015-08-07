@@ -5,8 +5,8 @@ export default {
   options: {
 
     transform: [
-      'babelify',
       'jadeify',
+      'babelify',
       'yamlify',
     ],
 

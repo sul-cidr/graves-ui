@@ -3,7 +3,10 @@
 export default {
 
   options: {
-    paths: 'node_modules'
+    paths: [
+      'node_modules',
+      'bower_components'
+    ]
   },
 
   dist: {

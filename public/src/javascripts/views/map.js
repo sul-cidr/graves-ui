@@ -10,6 +10,8 @@ import * as styles from './map.yml';
 import burialTpl from './burial.jade'
 import View from '../lib/view';
 
+import 'leaflet.MousePosition';
+
 
 export default View.extend({
 
@@ -26,6 +28,7 @@ export default View.extend({
   initialize: function() {
     this._initLeaflet();
     this._initEvents();
+    this._initSections();
   },
 
 
@@ -60,6 +63,9 @@ export default View.extend({
       styles.viewport.zoom
     );
 
+    // TODO|dev
+    L.control.mousePosition().addTo(this.map);
+
   },
 
 
@@ -71,6 +77,48 @@ export default View.extend({
     this.map.on('move', () => {
       this.channels.map.trigger('move');
     });
+
+  },
+
+
+  /**
+   * Draw section rectangles.
+   */
+  _initSections: function() {
+
+    for (let s of styles.sections) {
+
+      let pts = [
+        [s.ymin, s.xmin],
+        [s.ymax, s.xmin],
+        [s.ymax, s.xmax],
+        [s.ymin, s.xmax],
+        [s.ymin, s.xmin]
+      ];
+
+      let box = L.polyline(pts, {
+        color: 'black',
+        opacity: 1,
+        weight: 0.8,
+      });
+
+      // Create the box.
+      this.map.addLayer(box);
+
+      let icon = L.divIcon({
+        html: s.label,
+        iconSize: null
+      });
+
+      let marker = L.marker(
+        [s.ymin, s.xmin],
+        { icon: icon}
+      );
+
+      // Create the label.
+      this.map.addLayer(marker);
+
+    }
 
   },
 

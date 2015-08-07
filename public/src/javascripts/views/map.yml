@@ -1,6 +1,5 @@
 ---
 
-# TODO: Where to focus?
 viewport:
   focus: [30, 115]
   zoom: 5
@@ -30,3 +29,11 @@ burial:
     <<: *default
     fillColor: orange
     fillOpacity: 0.7
+
+sections:
+
+  - label: First Section
+    xmin: 108
+    ymin: 18.4
+    xmax: 111.5
+    ymax: 23.3

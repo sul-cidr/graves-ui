@@ -1,0 +1,13 @@
+{
+  "name": "graves-ui",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sul-cidr/graves-ui",
+  "authors": [
+    "David McClure <davidwilliammcclure@gmail.com>"
+  ],
+  "description": "Chinese Graves UI experiments.",
+  "license": "MIT",
+  "dependencies": {
+    "Leaflet.MousePosition": "https://github.com/ardhi/Leaflet.MousePosition.git"
+  }
+}

@@ -14,7 +14,9 @@
   "license": "Apache",
   "homepage": "https://github.com/sul-cidr/graves-ui",
   "devDependencies": {
+    "all": "0.0.0",
     "babelify": "^6.1.3",
+    "browserify-shim": "^3.8.10",
     "grunt": "^0.4.5",
     "grunt-browserify": "^4.0.0",
     "grunt-contrib-clean": "^0.6.0",
@@ -43,5 +45,8 @@
     "lesshat": "^3.0.2",
     "lodash": "^3.10.0",
     "wellknown": "^0.3.1"
+  },
+  "browser": {
+    "leaflet.MousePosition": "./bower_components/Leaflet.MousePosition/src/L.Control.MousePosition.js"
   }
 }
