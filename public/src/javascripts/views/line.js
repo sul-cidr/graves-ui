@@ -21,6 +21,7 @@ export default View.extend({
     this.span   = $(options.event.target);
     this.id     = this.span.attr('data-id');
     this.offset = this.span.offset();
+    this.height = this.span.outerHeight();
     this.width  = this.span.outerWidth();
   },
 
@@ -51,14 +52,20 @@ export default View.extend({
    */
   update: function() {
 
-    // Span offset.
-    let x1 = this.offset.left + this.width + styles.padding;
-    let y1 = this.offset.top + styles.padding;
-
     // Map offset.
     let [x2, y2] = this.channels.map.request(
       'burialOffset', this.id
     );
+
+    // Text X.
+    let x1 = x2 > this.offset.left ?
+      this.offset.left + this.width + styles.padding :
+      this.offset.left - styles.padding;
+
+    // Text Y.
+    let y1 = y2 > this.offset.top ?
+      this.offset.top + this.height - styles.padding :
+      this.offset.top + styles.padding;
 
     this.line.attr({
       x1: x1,
