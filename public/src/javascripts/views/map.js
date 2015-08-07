@@ -98,8 +98,8 @@ export default View.extend({
 
       let box = L.polyline(pts, {
         color: 'black',
+        weight: 1,
         opacity: 1,
-        weight: 0.8,
       });
 
       // Create the box.

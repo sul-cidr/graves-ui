@@ -43,3 +43,15 @@ sections:
     ymin: 24.8
     xmax: 109
     ymax: 28
+
+  - label: Third Section
+    xmin: 113.2
+    ymin: 32.2
+    xmax: 116.2
+    ymax: 35.2
+
+  - label: Fourth Section
+    xmin: 101.2
+    ymin: 37.6
+    xmax: 103
+    ymax: 39.4
