@@ -14,8 +14,8 @@ town:
 
 province:
   color: '#4689f6'
-  fillOpacity: 0.1
-  weight: 1
+  fillOpacity: 0.05
+  weight: 0.5
 
 burial:
 
