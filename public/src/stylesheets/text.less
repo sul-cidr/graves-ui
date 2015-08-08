@@ -47,11 +47,15 @@
 
   .section {
 
-    opacity: 0.3;
+    opacity: 0.5;
     cursor: pointer;
 
     &:hover {
-      opacity: 0.8;
+      opacity: 1;
+    }
+
+    &.active {
+      opacity: 1;
       .heading {
         color: @color-highlight;
       }
