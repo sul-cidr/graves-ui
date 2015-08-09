@@ -152,19 +152,19 @@ export default View.extend({
     // Highlight.
     this.sites.on(
       'mouseover',
-      this.onHighlight.bind(this)
+      this.onHighlightSite.bind(this)
     );
 
     // Unhighlight.
     this.sites.on(
       'mouseout',
-      this.onUnhighlight.bind(this)
+      this.onUnhighlightSite.bind(this)
     );
 
     // Select.
     this.sites.on(
       'click',
-      this.onSelect.bind(this)
+      this.onSelectSite.bind(this)
     );
 
   },
@@ -222,10 +222,23 @@ export default View.extend({
     this.labels = L.featureGroup(labels);
     this.labels.addTo(this.map);
 
-    // TODO|dev
-    this.boxes.on('mouseover', e => {
-      console.log(e);
-    });
+    // Highlight.
+    this.boxes.on(
+      'mouseover',
+      this.onHighlightSection.bind(this)
+    );
+
+    // Unhighlight.
+    this.boxes.on(
+      'mouseout',
+      this.onUnhighlightSection.bind(this)
+    );
+
+    // Select.
+    this.boxes.on(
+      'click',
+      this.onSelectSection.bind(this)
+    );
 
   },
 
@@ -238,7 +251,7 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onHighlight: function(e) {
+  onHighlightSite: function(e) {
     this.channels.global.trigger('highlight', e.layer.options.id);
     e.layer.openPopup();
   },
@@ -249,7 +262,7 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onUnhighlight: function(e) {
+  onUnhighlightSite: function(e) {
     this.channels.global.trigger('unhighlight', e.layer.options.id);
     e.layer.closePopup();
   },
@@ -260,8 +273,38 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onSelect: function(e) {
+  onSelectSite: function(e) {
     this.channels.global.trigger('select', e.layer.options.id);
+  },
+
+
+  /**
+   * When a section is highlighted.
+   *
+   * @param {Object} e
+   */
+  onHighlightSection: function(e) {
+    // TODO
+  },
+
+
+  /**
+   * When a section is unhighlighted.
+   *
+   * @param {Object} e
+   */
+  onUnhighlightSection: function(e) {
+    // TODO
+  },
+
+
+  /**
+   * When a section is clicked.
+   *
+   * @param {Object} e
+   */
+  onSelectSection: function(e) {
+    // TODO
   },
 
 
