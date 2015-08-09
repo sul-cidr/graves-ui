@@ -29,8 +29,7 @@ export default View.extend({
    * @param {Object} e
    */
   onClick: function(e) {
-    this.sections.removeClass('active');
-    $(e.currentTarget).addClass('active');
+    // TODO
   },
 
 
