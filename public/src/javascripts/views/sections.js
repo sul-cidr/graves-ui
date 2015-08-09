@@ -11,11 +11,37 @@ export default View.extend({
   el: '#text',
 
 
+  events: {
+    'mouseenter .section': 'onEnter',
+    'mouseleave .section': 'onLeave',
+  },
+
+
   /**
    * Select sections.
    */
   initialize: function() {
     this.sections = this.$('.section');
+  },
+
+
+  /**
+   * When the cursor enters a section.
+   *
+   * @param {Object} e
+   */
+  onEnter: function(e) {
+    console.log(e);
+  },
+
+
+  /**
+   * When the cursor leaves a section.
+   *
+   * @param {Object} e
+   */
+  onLeave: function(e) {
+    console.log(e);
   },
 
 
