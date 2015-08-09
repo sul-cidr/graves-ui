@@ -177,9 +177,14 @@ export default View.extend({
    */
   ingestSections: function(data) {
 
+    this.slugToSection = {};
+    let boxes = [], labels = [];
+
     for (let s of data) {
 
-      let pts = [
+      // Create the box.
+
+      let points = [
         [s.ymin, s.xmin],
         [s.ymax, s.xmin],
         [s.ymax, s.xmax],
@@ -187,10 +192,10 @@ export default View.extend({
         [s.ymin, s.xmin]
       ];
 
-      let box = L.polygon(pts, styles.section);
+      let box = L.polygon(points, styles.section);
+      boxes.push(box);
 
-      // Create the box.
-      this.map.addLayer(box);
+      // Create the label.
 
       let icon = L.divIcon({
         html: s.label,
@@ -202,10 +207,25 @@ export default View.extend({
         { icon: icon }
       );
 
-      // Create the label.
-      this.map.addLayer(marker);
+      labels.push(marker);
+
+      // Map slug -> box.
+      this.slugToSection[s.slug] = box;
 
     }
+
+    // Add boxes.
+    this.boxes = L.featureGroup(boxes);
+    this.boxes.addTo(this.map);
+
+    // Add labels.
+    this.labels = L.featureGroup(labels);
+    this.labels.addTo(this.map);
+
+    // TODO|dev
+    this.boxes.on('mouseover', e => {
+      console.log(e);
+    });
 
   },
 
