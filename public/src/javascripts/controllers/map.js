@@ -3,6 +3,7 @@
 import $ from 'jquery';
 import Controller from '../lib/controller';
 import Map from '../views/map';
+import * as data from './map.yml';
 
 
 export default Controller.extend({
@@ -34,6 +35,7 @@ export default Controller.extend({
 
     this._loadProvinces();
     this._loadBurials();
+    this._loadSections();
 
   },
 
@@ -55,6 +57,14 @@ export default Controller.extend({
     $.getJSON('burials', (data) => {
       this.view.ingestBurials(data);
     });
+  },
+
+
+  /**
+   * Load section regions.
+   */
+  _loadSections: function() {
+    this.view.ingestSections(data.sections);
   },
 
 

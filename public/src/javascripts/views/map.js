@@ -28,7 +28,6 @@ export default View.extend({
   initialize: function() {
     this._initLeaflet();
     this._initEvents();
-    this._initSections();
   },
 
 
@@ -77,48 +76,6 @@ export default View.extend({
     this.map.on('move', () => {
       this.channels.map.trigger('move');
     });
-
-  },
-
-
-  /**
-   * Draw section rectangles.
-   */
-  _initSections: function() {
-
-    for (let s of styles.sections) {
-
-      let pts = [
-        [s.ymin, s.xmin],
-        [s.ymax, s.xmin],
-        [s.ymax, s.xmax],
-        [s.ymin, s.xmax],
-        [s.ymin, s.xmin]
-      ];
-
-      let box = L.polyline(pts, {
-        color: 'black',
-        weight: 1,
-        opacity: 1,
-      });
-
-      // Create the box.
-      this.map.addLayer(box);
-
-      let icon = L.divIcon({
-        html: s.label,
-        iconSize: null
-      });
-
-      let marker = L.marker(
-        [s.ymin, s.xmin],
-        { icon: icon}
-      );
-
-      // Create the label.
-      this.map.addLayer(marker);
-
-    }
 
   },
 
@@ -209,6 +166,46 @@ export default View.extend({
       'click',
       this.onSelect.bind(this)
     );
+
+  },
+
+
+  /**
+   * Draw section rectangles.
+   *
+   * @param {Object} data
+   */
+  ingestSections: function(data) {
+
+    for (let s of data) {
+
+      let pts = [
+        [s.ymin, s.xmin],
+        [s.ymax, s.xmin],
+        [s.ymax, s.xmax],
+        [s.ymin, s.xmax],
+        [s.ymin, s.xmin]
+      ];
+
+      let box = L.polyline(pts, styles.section);
+
+      // Create the box.
+      this.map.addLayer(box);
+
+      let icon = L.divIcon({
+        html: s.label,
+        iconSize: null
+      });
+
+      let marker = L.marker(
+        [s.ymin, s.xmin],
+        { icon: icon }
+      );
+
+      // Create the label.
+      this.map.addLayer(marker);
+
+    }
 
   },
 

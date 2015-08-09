@@ -1,0 +1,27 @@
+---
+
+sections:
+
+  - label: First Section
+    xmin: 107.7
+    ymin: 18.2
+    xmax: 111.5
+    ymax: 23.3
+
+  - label: Second Section
+    xmin: 103.7
+    ymin: 24.8
+    xmax: 109
+    ymax: 28
+
+  - label: Third Section
+    xmin: 113.2
+    ymin: 32.2
+    xmax: 116.2
+    ymax: 35.2
+
+  - label: Fourth Section
+    xmin: 101.2
+    ymin: 37.6
+    xmax: 103
+    ymax: 39.4
