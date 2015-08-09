@@ -341,7 +341,7 @@ export default View.extend({
    */
   selectBurial: function(id) {
     let marker = this.idToBurial[id];
-    this.map.flyTo(marker.getLatLng(), styles.selection.zoom);
+    this.map.flyTo(marker.getLatLng(), styles.zoom.burial);
   },
 
 
@@ -388,7 +388,7 @@ export default View.extend({
    */
   selectSection: function(slug) {
     let box = this.slugToBox[slug];
-    this.map.flyTo(box.getBounds().getCenter(), styles.selection.zoom);
+    this.map.flyTo(box.getBounds().getCenter(), styles.zoom.section);
   },
 
 

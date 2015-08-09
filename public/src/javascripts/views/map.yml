@@ -4,8 +4,9 @@ viewport:
   focus: [30, 115]
   zoom: 5
 
-selection:
-  zoom: 8
+zoom:
+  section: 7
+  burial: 8
 
 town:
   radius: 2
