@@ -172,9 +172,10 @@ export default View.extend({
    */
   ingestSections: function(data) {
 
-    this.slugToSection = {};
-    let boxes = [], labels = [];
+    this.slugToLabel = {};
+    this.slugToBox = {};
 
+    let labels = [], boxes = [];
     for (let s of data) {
 
       // ** Create the box.
@@ -187,14 +188,11 @@ export default View.extend({
         [s.ymin, s.xmin]
       ];
 
-      // Merge SVG defaults + slug.
-      let options = _.merge(
-        _.clone(styles.section.default),
-        { slug: s.slug }
+      let box = L.polygon(
+        points,
+        _.clone(styles.section.default)
       );
 
-      // Register the polygon.
-      let box = L.polygon(points, options);
       boxes.push(box);
 
       // ** Create the label.
@@ -204,15 +202,16 @@ export default View.extend({
         iconSize: null
       });
 
-      let marker = L.marker(
-        [s.ymin, s.xmin],
-        { icon: icon }
-      );
+      let label = L.marker([s.ymin, s.xmin], {
+        icon: icon,
+        slug: s.slug
+      });
 
-      labels.push(marker);
+      labels.push(label);
 
-      // Map slug -> box.
-      this.slugToSection[s.slug] = box;
+      // Map slug -> section.
+      this.slugToLabel[s.slug] = label;
+      this.slugToBox[s.slug] = box;
 
     }
 
@@ -225,19 +224,19 @@ export default View.extend({
     this.labels.addTo(this.map);
 
     // Highlight.
-    this.boxes.on(
+    this.labels.on(
       'mouseover',
       this.onHighlightSection.bind(this)
     );
 
     // Unhighlight.
-    this.boxes.on(
+    this.labels.on(
       'mouseout',
       this.onUnhighlightSection.bind(this)
     );
 
     // Select.
-    this.boxes.on(
+    this.labels.on(
       'click',
       this.onSelectSection.bind(this)
     );
@@ -352,8 +351,15 @@ export default View.extend({
    * @param {String} slug
    */
   highlightSection: function(slug) {
-    let box = this.slugToSection[slug];
+
+    // Add class to label.
+    let label = $(this.slugToLabel[slug]._icon);
+    label.addClass('highlight');
+
+    // Highlight box path.
+    let box = this.slugToBox[slug];
     box.setStyle(styles.section.highlight);
+
   },
 
 
@@ -363,8 +369,15 @@ export default View.extend({
    * @param {String} slug
    */
   unhighlightSection: function(slug) {
-    let box = this.slugToSection[slug];
+
+    // Add class to label.
+    let label = $(this.slugToLabel[slug]._icon);
+    label.removeClass('highlight');
+
+    // Highlight box path.
+    let box = this.slugToBox[slug];
     box.setStyle(styles.section.default);
+
   },
 
 
@@ -374,7 +387,7 @@ export default View.extend({
    * @param {String} slug
    */
   selectSection: function(slug) {
-    let box = this.slugToSection[slug];
+    let box = this.slugToBox[slug];
     this.map.flyTo(box.getBounds().getCenter(), styles.selection.zoom);
   },
 
