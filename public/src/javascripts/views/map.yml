@@ -33,4 +33,5 @@ burial:
 section:
   color: black
   weight: 1
+  fillOpacity: 0
   opacity: 1

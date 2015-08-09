@@ -187,7 +187,7 @@ export default View.extend({
         [s.ymin, s.xmin]
       ];
 
-      let box = L.polyline(pts, styles.section);
+      let box = L.polygon(pts, styles.section);
 
       // Create the box.
       this.map.addLayer(box);
