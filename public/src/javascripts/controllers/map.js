@@ -14,9 +14,9 @@ export default Controller.extend({
 
   events: {
     burials: {
-      highlight: 'onHighlight',
-      unhighlight: 'onUnhighlight',
-      select: 'onSelect',
+      highlight: 'onHighlightBurial',
+      unhighlight: 'onUnhighlightBurial',
+      select: 'onSelectBurial',
     }
   },
 
@@ -73,8 +73,8 @@ export default Controller.extend({
    *
    * @param {Number} id
    */
-  onHighlight: function(id) {
-    this.view.highlight(id);
+  onHighlightBurial: function(id) {
+    this.view.highlightBurial(id);
   },
 
 
@@ -83,8 +83,8 @@ export default Controller.extend({
    *
    * @param {Number} id
    */
-  onUnhighlight: function(id) {
-    this.view.unhighlight(id);
+  onUnhighlightBurial: function(id) {
+    this.view.unhighlightBurial(id);
   },
 
 
@@ -93,8 +93,8 @@ export default Controller.extend({
    *
    * @param {Number} id
    */
-  onSelect: function(id) {
-    this.view.select(id);
+  onSelectBurial: function(id) {
+    this.view.selectBurial(id);
   },
 
 

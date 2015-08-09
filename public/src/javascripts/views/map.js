@@ -19,7 +19,7 @@ export default View.extend({
   el: '#map',
 
 
-  channels: ['map', 'burials'],
+  channels: ['map', 'burials', 'sections'],
 
 
   /**
@@ -113,7 +113,7 @@ export default View.extend({
    */
   ingestBurials: function(data) {
 
-    this.idToSite = {};
+    this.idToBurial = {};
 
     // Parse WKT -> GeoJSON.
     let features = data.map(b => {
@@ -139,32 +139,32 @@ export default View.extend({
       });
 
       // Map id -> feature.
-      this.idToSite[b.id] = feature;
+      this.idToBurial[b.id] = feature;
 
       return feature;
 
     });
 
     // Add feature group to map.
-    this.sites = L.featureGroup(features);
-    this.sites.addTo(this.map);
+    this.burials = L.featureGroup(features);
+    this.burials.addTo(this.map);
 
     // Highlight.
-    this.sites.on(
+    this.burials.on(
       'mouseover',
-      this.onHighlightSite.bind(this)
+      this.onHighlightBurial.bind(this)
     );
 
     // Unhighlight.
-    this.sites.on(
+    this.burials.on(
       'mouseout',
-      this.onUnhighlightSite.bind(this)
+      this.onUnhighlightBurial.bind(this)
     );
 
     // Select.
-    this.sites.on(
+    this.burials.on(
       'click',
-      this.onSelectSite.bind(this)
+      this.onSelectBurial.bind(this)
     );
 
   },
@@ -182,7 +182,7 @@ export default View.extend({
 
     for (let s of data) {
 
-      // Create the box.
+      // ** Create the box.
 
       let points = [
         [s.ymin, s.xmin],
@@ -192,10 +192,17 @@ export default View.extend({
         [s.ymin, s.xmin]
       ];
 
-      let box = L.polygon(points, styles.section);
+      // Merge SVG defaults + slug.
+      let options = _.merge(
+        _.clone(styles.section),
+        { slug: s.slug }
+      );
+
+      // Register the polygon.
+      let box = L.polygon(points, options);
       boxes.push(box);
 
-      // Create the label.
+      // ** Create the label.
 
       let icon = L.divIcon({
         html: s.label,
@@ -251,7 +258,7 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onHighlightSite: function(e) {
+  onHighlightBurial: function(e) {
     this.channels.burials.trigger('highlight', e.layer.options.id);
     e.layer.openPopup();
   },
@@ -262,7 +269,7 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onUnhighlightSite: function(e) {
+  onUnhighlightBurial: function(e) {
     this.channels.burials.trigger('unhighlight', e.layer.options.id);
     e.layer.closePopup();
   },
@@ -273,7 +280,7 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onSelectSite: function(e) {
+  onSelectBurial: function(e) {
     this.channels.burials.trigger('select', e.layer.options.id);
   },
 
@@ -284,8 +291,7 @@ export default View.extend({
    * @param {Object} e
    */
   onHighlightSection: function(e) {
-    // TODO
-    console.log(e);
+    this.channels.sections.trigger('highlight', e.layer.options.slug);
   },
 
 
@@ -295,8 +301,7 @@ export default View.extend({
    * @param {Object} e
    */
   onUnhighlightSection: function(e) {
-    // TODO
-    console.log(e);
+    this.channels.sections.trigger('unhighlight', e.layer.options.slug);
   },
 
 
@@ -306,8 +311,7 @@ export default View.extend({
    * @param {Object} e
    */
   onSelectSection: function(e) {
-    // TODO
-    console.log(e);
+    this.channels.sections.trigger('select', e.layer.options.slug);
   },
 
 
@@ -319,8 +323,8 @@ export default View.extend({
    *
    * @param {Number} id
    */
-  highlight: function(id) {
-    let marker = this.idToSite[id];
+  highlightBurial: function(id) {
+    let marker = this.idToBurial[id];
     marker.setStyle(styles.burial.highlight);
   },
 
@@ -330,8 +334,8 @@ export default View.extend({
    *
    * @param {Number} id
    */
-  unhighlight: function(id) {
-    let marker = this.idToSite[id];
+  unhighlightBurial: function(id) {
+    let marker = this.idToBurial[id];
     marker.setStyle(styles.burial.default);
   },
 
@@ -341,8 +345,8 @@ export default View.extend({
    *
    * @param {Number} id
    */
-  select: function(id) {
-    let marker = this.idToSite[id];
+  selectBurial: function(id) {
+    let marker = this.idToBurial[id];
     this.map.flyTo(marker.getLatLng(), styles.selection.zoom);
   },
 
@@ -358,7 +362,7 @@ export default View.extend({
   getBurialOffset: function(id) {
 
     // ID -> coordinate.
-    let latLng = this.idToSite[id].getLatLng();
+    let latLng = this.idToBurial[id].getLatLng();
 
     // Coordinate -> layer point.
     let layerPoint = this.map.latLngToLayerPoint(latLng);
