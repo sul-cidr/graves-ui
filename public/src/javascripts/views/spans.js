@@ -18,7 +18,7 @@ export default View.extend({
   },
 
 
-  channels: ['spans', 'global'],
+  channels: ['spans', 'burials'],
 
 
   /**
@@ -39,7 +39,7 @@ export default View.extend({
    */
   onSpanEnter: function(e) {
     let id = this.getIdFromEvent(e);
-    this.channels.global.trigger('highlight', id);
+    this.channels.burials.trigger('highlight', id);
     this.channels.spans.trigger('enter', e);
   },
 
@@ -51,7 +51,7 @@ export default View.extend({
    */
   onSpanLeave: function(e) {
     let id = this.getIdFromEvent(e);
-    this.channels.global.trigger('unhighlight', id);
+    this.channels.burials.trigger('unhighlight', id);
   },
 
 
@@ -62,7 +62,7 @@ export default View.extend({
    */
   onSpanClick: function(e) {
     let id = this.getIdFromEvent(e);
-    this.channels.global.trigger('select', id);
+    this.channels.burials.trigger('select', id);
   },
 
 

@@ -19,7 +19,7 @@ export default View.extend({
   el: '#map',
 
 
-  channels: ['map', 'global'],
+  channels: ['map', 'burials'],
 
 
   /**
@@ -252,7 +252,7 @@ export default View.extend({
    * @param {Object} e
    */
   onHighlightSite: function(e) {
-    this.channels.global.trigger('highlight', e.layer.options.id);
+    this.channels.burials.trigger('highlight', e.layer.options.id);
     e.layer.openPopup();
   },
 
@@ -263,7 +263,7 @@ export default View.extend({
    * @param {Object} e
    */
   onUnhighlightSite: function(e) {
-    this.channels.global.trigger('unhighlight', e.layer.options.id);
+    this.channels.burials.trigger('unhighlight', e.layer.options.id);
     e.layer.closePopup();
   },
 
@@ -274,7 +274,7 @@ export default View.extend({
    * @param {Object} e
    */
   onSelectSite: function(e) {
-    this.channels.global.trigger('select', e.layer.options.id);
+    this.channels.burials.trigger('select', e.layer.options.id);
   },
 
 
@@ -285,6 +285,7 @@ export default View.extend({
    */
   onHighlightSection: function(e) {
     // TODO
+    console.log(e);
   },
 
 
@@ -295,6 +296,7 @@ export default View.extend({
    */
   onUnhighlightSection: function(e) {
     // TODO
+    console.log(e);
   },
 
 
@@ -305,6 +307,7 @@ export default View.extend({
    */
   onSelectSection: function(e) {
     // TODO
+    console.log(e);
   },
 
 

@@ -11,7 +11,7 @@ export default Controller.extend({
 
 
   events: {
-    global: {
+    burials: {
       highlight: 'onHighlight',
       unhighlight: 'onUnhighlight',
     }

@@ -13,7 +13,7 @@ export default Controller.extend({
       enter: 'onShow'
     },
 
-    global: {
+    burials: {
       unhighlight: 'onHide'
     },
 
