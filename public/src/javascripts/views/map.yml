@@ -41,3 +41,4 @@ section:
   highlight:
     <<: *default
     color: orange
+    weight: 2
