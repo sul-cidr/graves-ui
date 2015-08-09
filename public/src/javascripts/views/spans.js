@@ -12,9 +12,9 @@ export default View.extend({
 
 
   events: {
-    'mouseenter span.burial': 'onSpanEnter',
-    'mouseleave span.burial': 'onSpanLeave',
-    'click span.burial': 'onSpanClick',
+    'mouseenter span.burial': 'onEnter',
+    'mouseleave span.burial': 'onLeave',
+    'click span.burial': 'onClick',
   },
 
 
@@ -37,7 +37,7 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onSpanEnter: function(e) {
+  onEnter: function(e) {
     let id = this.getIdFromEvent(e);
     this.channels.burials.trigger('highlight', id);
     this.channels.spans.trigger('enter', e);
@@ -49,7 +49,7 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onSpanLeave: function(e) {
+  onLeave: function(e) {
     let id = this.getIdFromEvent(e);
     this.channels.burials.trigger('unhighlight', id);
   },
@@ -60,7 +60,7 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onSpanClick: function(e) {
+  onClick: function(e) {
     let id = this.getIdFromEvent(e);
     this.channels.burials.trigger('select', id);
   },
