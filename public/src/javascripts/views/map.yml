@@ -31,7 +31,13 @@ burial:
     fillOpacity: 0.7
 
 section:
-  color: black
-  weight: 1
-  fillOpacity: 0
-  opacity: 1
+
+  default: &default
+    color: black
+    weight: 1
+    fillOpacity: 0
+    opacity: 1
+
+  highlight:
+    <<: *default
+    color: orange

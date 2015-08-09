@@ -189,7 +189,7 @@ export default View.extend({
 
       // Merge SVG defaults + slug.
       let options = _.merge(
-        _.clone(styles.section),
+        _.clone(styles.section.default),
         { slug: s.slug }
       );
 
@@ -343,6 +343,39 @@ export default View.extend({
   selectBurial: function(id) {
     let marker = this.idToBurial[id];
     this.map.flyTo(marker.getLatLng(), styles.selection.zoom);
+  },
+
+
+  /**
+   * Highlight a section.
+   *
+   * @param {String} slug
+   */
+  highlightSection: function(slug) {
+    let box = this.slugToSection[slug];
+    box.setStyle(styles.section.highlight);
+  },
+
+
+  /**
+   * Unhighlight a section.
+   *
+   * @param {String} slug
+   */
+  unhighlightSection: function(slug) {
+    let box = this.slugToSection[slug];
+    box.setStyle(styles.section.default);
+  },
+
+
+  /**
+   * Select a section.
+   *
+   * @param {String} slug
+   */
+  selectSection: function(slug) {
+    let box = this.slugToSection[slug];
+    this.map.flyTo(box.getBounds().getCenter(), styles.selection.zoom);
   },
 
 

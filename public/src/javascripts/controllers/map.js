@@ -13,11 +13,19 @@ export default Controller.extend({
 
 
   events: {
+
     burials: {
       highlight: 'onHighlightBurial',
       unhighlight: 'onUnhighlightBurial',
       select: 'onSelectBurial',
+    },
+
+    sections: {
+      highlight: 'onHighlightSection',
+      unhighlight: 'onUnhighlightSection',
+      select: 'onSelectSection',
     }
+
   },
 
 
@@ -95,6 +103,36 @@ export default Controller.extend({
    */
   onSelectBurial: function(id) {
     this.view.selectBurial(id);
+  },
+
+
+  /**
+   * Highlight a section box.
+   *
+   * @param {String} slug
+   */
+  onHighlightSection: function(slug) {
+    this.view.highlightSection(slug);
+  },
+
+
+  /**
+   * Unhighlight a section box.
+   *
+   * @param {String} slug
+   */
+  onUnhighlightSection: function(slug) {
+    this.view.unhighlightSection(slug);
+  },
+
+
+  /**
+   * Select a section box.
+   *
+   * @param {String} slug
+   */
+  onSelectSection: function(slug) {
+    this.view.selectSection(slug);
   },
 
 
