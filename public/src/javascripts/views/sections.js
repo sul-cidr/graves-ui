@@ -2,6 +2,7 @@
 
 import $ from 'jquery';
 import View from '../lib/view';
+import * as styles from './sections.yml';
 
 
 export default View.extend({
@@ -29,13 +30,11 @@ export default View.extend({
     let section = this.getSectionBySlug(slug);
     if (!section) return;
 
-    console.log(section.offset().top);
-
     // Scroll to selection.
     this.$el.animate({
       scrollTop: section[0].offsetTop
     }, {
-      duration: 500
+      duration: styles.duration
     });
 
   },
