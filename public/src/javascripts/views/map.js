@@ -10,8 +10,6 @@ import * as styles from './map.yml';
 import burialTpl from './burial.jade'
 import View from '../lib/view';
 
-import 'leaflet.MousePosition';
-
 
 export default View.extend({
 
@@ -61,9 +59,6 @@ export default View.extend({
       styles.viewport.focus,
       styles.viewport.zoom
     );
-
-    // TODO|dev
-    L.control.mousePosition().addTo(this.map);
 
   },
 
