@@ -14,6 +14,12 @@ export default Controller.extend({
 
   events: {
 
+    data: {
+      provinces: 'ingestProvinces',
+      burials: 'ingestBurials',
+      sections: 'ingestSections',
+    },
+
     burials: {
       highlight: 'onHighlightBurial',
       unhighlight: 'onUnhighlightBurial',
@@ -39,41 +45,37 @@ export default Controller.extend({
    * Start the view.
    */
   initialize: function() {
-
     this.view = new Map();
-
-    this._loadProvinces();
-    this._loadBurials();
-    this._loadSections();
-
   },
 
 
   /**
-   * Load province polygons.
+   * Ingest provinces.
+   *
+   * @param {Object} provinces
    */
-  _loadProvinces: function() {
-    $.getJSON('provinces', (data) => {
-      this.view.ingestProvinces(data);
-    });
+  ingestProvinces: function(provinces) {
+    this.view.ingestProvinces(provinces);
   },
 
 
   /**
    * Load burial sites.
+   *
+   * @param {Object} burials
    */
-  _loadBurials: function() {
-    $.getJSON('burials', (data) => {
-      this.view.ingestBurials(data);
-    });
+  ingestBurials: function(burials) {
+    this.view.ingestBurials(burials);
   },
 
 
   /**
    * Load section regions.
+   *
+   * @param {Object} sections
    */
-  _loadSections: function() {
-    this.view.ingestSections(data.sections);
+  ingestSections: function(sections) {
+    this.view.ingestSections(sections);
   },
 
 
