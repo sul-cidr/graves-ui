@@ -72,7 +72,8 @@ export default View.extend({
    * @param {Object} e
    */
   onSectionEnter: function(e) {
-    // TODO
+    let slug = this.getSectionSlugFromEvent(e);
+    this.channels.sections.trigger('highlight', slug);
   },
 
 
@@ -82,7 +83,8 @@ export default View.extend({
    * @param {Object} e
    */
   onSectionLeave: function(e) {
-    // TODO
+    let slug = this.getSectionSlugFromEvent(e);
+    this.channels.sections.trigger('unhighlight', slug);
   },
 
 
@@ -134,7 +136,8 @@ export default View.extend({
   /**
    * Get a burial ID from a cursor event.
    *
-   * @param {Number} id
+   * @param {Object} e
+   * @returns {Number}
    */
   getBurialIdFromEvent: function(e) {
     return Number($(e.currentTarget).attr('data-id'));
@@ -142,9 +145,21 @@ export default View.extend({
 
 
   /**
+   * Get a section slug from a cursor event.
+   *
+   * @param {Object} e
+   * @returns {String}
+   */
+  getSectionSlugFromEvent: function(e) {
+    return $(e.currentTarget).attr('data-slug');
+  },
+
+
+  /**
    * Get burial spans by id.
    *
    * @param {Number} id
+   * @return {Object}
    */
   getBurialsById: function(id) {
     return this.$(`span.burial[data-id=${id}]`)
@@ -155,6 +170,7 @@ export default View.extend({
    * Get a section by slug.
    *
    * @param {String} slug
+   * @return {Object}
    */
   getSectionBySlug: function(slug) {
     return this.$(`.section[data-slug=${slug}]`);
