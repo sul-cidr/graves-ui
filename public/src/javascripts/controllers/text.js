@@ -18,6 +18,8 @@ export default Controller.extend({
     },
 
     sections: {
+      highlight: 'onHighlightSection',
+      unhighlight: 'onUnhighlightSection',
       select: 'onSelectSection'
     }
 
@@ -49,6 +51,26 @@ export default Controller.extend({
    */
   onUnhighlightBurial: function(id) {
     this.view.unhighlightBurial(id);
+  },
+
+
+  /**
+   * Highlight a section.
+   *
+   * @param {String} slug
+   */
+  onHighlightSection: function(slug) {
+    this.view.highlightSection(slug);
+  },
+
+
+  /**
+   * Unhighlight a section.
+   *
+   * @param {String} slug
+   */
+  onUnhighlightSection: function(slug) {
+    this.view.unhighlightSection(slug);
   },
 
 

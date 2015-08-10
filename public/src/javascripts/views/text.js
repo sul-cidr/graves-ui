@@ -112,6 +112,26 @@ export default View.extend({
 
 
   /**
+   * Highlight a section.
+   *
+   * @param {String} slug
+   */
+  highlightSection: function(slug) {
+    this.getSectionBySlug(slug).addClass('highlight');
+  },
+
+
+  /**
+   * Unhighlight a section.
+   *
+   * @param {String} slug
+   */
+  unhighlightSection: function(slug) {
+    this.getSectionBySlug(slug).removeClass('highlight');
+  },
+
+
+  /**
    * Unhighlight burial spans.
    *
    * @param {String} slug
