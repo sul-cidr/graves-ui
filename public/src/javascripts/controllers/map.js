@@ -3,7 +3,6 @@
 import $ from 'jquery';
 import Controller from '../lib/controller';
 import Map from '../views/map';
-import * as data from './map.yml';
 
 
 export default Controller.extend({

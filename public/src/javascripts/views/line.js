@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import d3 from 'd3';
 import View from '../lib/view';
-import * as styles from './line.yml';
+import styles from './line.yml';
 
 
 export default View.extend({

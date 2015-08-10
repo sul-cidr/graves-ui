@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Radio from 'backbone.radio';
 import Controller from '../lib/controller';
 import Map from '../views/map';
-import * as data from './map.yml';
+import sections from '../data/sections.yml';
 
 
 export default Controller.extend({
@@ -51,7 +51,7 @@ export default Controller.extend({
    * Load section regions.
    */
   _loadSections: function() {
-    this.channel.trigger('sections', data.sections);
+    this.channel.trigger('sections', sections);
   },
 
 

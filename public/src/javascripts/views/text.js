@@ -3,8 +3,8 @@
 import _ from 'lodash';
 import $ from 'jquery';
 import View from '../lib/view';
-import * as styles from './text.yml';
-import tipTpl from './tip.jade'
+import styles from './text.yml';
+import tipTpl from './tip.jade';
 
 
 export default View.extend({

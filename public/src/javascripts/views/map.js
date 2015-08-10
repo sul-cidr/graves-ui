@@ -6,7 +6,7 @@ import L from 'leaflet';
 import wellknown from 'wellknown';
 import * as omnivore from 'leaflet-omnivore'
 import {swap} from '../utils'
-import * as styles from './map.yml';
+import styles from './map.yml';
 import View from '../lib/view';
 
 
