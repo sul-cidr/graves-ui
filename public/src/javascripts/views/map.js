@@ -129,7 +129,7 @@ export default View.extend({
       feature.setRadius(Math.log(b.count || 20)*3);
 
       // Attach the popup.
-      feature.bindPopup(burialTpl({ name: b.town }), {
+      feature.bindPopup(b.town, {
         closeButton: false
       });
 
