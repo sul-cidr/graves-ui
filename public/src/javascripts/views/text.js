@@ -30,6 +30,35 @@ export default View.extend({
   channels: ['text', 'burials', 'sections', 'map'],
 
 
+  initialize: function() {
+    this._initPosition();
+  },
+
+
+  /**
+   * On resize, cache container boundaries.
+   */
+  _initPosition: function() {
+
+    this.setPosition();
+
+    // Re-cache on resize.
+    let resize = _.debounce(this.setPosition.bind(this), 500);
+    $(window).resize(resize);
+
+  },
+
+
+  /**
+   * On resize, cache container boundaries.
+   */
+  setPosition: function() {
+    this.offset = this.$el.offset();
+    this.width  = this.$el.outerWidth();
+    this.rightX = this.offset.left + this.width;
+  },
+
+
   // ** Publishers:
 
 
@@ -167,6 +196,9 @@ export default View.extend({
       duration: styles.duration
     });
 
+    // Disable selection.
+    this.disableSelect(section);
+
   },
 
 
@@ -180,6 +212,8 @@ export default View.extend({
    */
   enableSelect: function(section) {
 
+    section.addClass('selectable');
+
     // Click to select.
     section.click(e => {
       let slug = section.attr('data-slug');
@@ -189,9 +223,9 @@ export default View.extend({
     // Inject the tooltip.
     this.tip = $(tipTpl()).appendTo('body');
 
-    // TODO
-    this.$el.mousemove(e => {
-      this.tip.css();
+    // Sync tooltip Y with cursor.
+    section.mousemove(e => {
+      this.tip.css({ top: e.clientY, left: this.rightX+10 });
     });
 
   },
@@ -203,8 +237,13 @@ export default View.extend({
    * @param {Object} section
    */
   disableSelect: function(section) {
-    section.off('click');
+
+    section.removeClass('selectable');
+
+    // Remove tip, unbind events.
     this.tip.remove();
+    section.off('click mousemove');
+
   },
 
 

@@ -45,10 +45,16 @@
 
   }
 
-  .section.highlight {
+  .section {
 
-    .heading {
-      color: @color-highlight;
+    &.highlight {
+      .heading {
+        color: @color-highlight;
+      }
+    }
+
+    &.selectable {
+      cursor: pointer;
     }
 
   }
