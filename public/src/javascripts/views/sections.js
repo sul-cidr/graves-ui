@@ -110,7 +110,7 @@ export default View.extend({
 
     // Inject the tooltip.
     this.tip = $(tipTpl({
-      content: 'Click to focus on section'
+      content: 'Click to focus'
     }));
 
     this.tip.appendTo('body');
