@@ -17,7 +17,7 @@ export default View.extend({
   },
 
 
-  channels: ['map'],
+  channels: ['map', 'sections'],
 
 
   /**
@@ -42,14 +42,7 @@ export default View.extend({
     let focused = this.channels.map.request('sectionFocused', slug);
 
     if (!focused) {
-
-      section.addClass('unfocused');
-
-      // TODO: Click to select.
-      section.click(e => {
-        console.log('select');
-      });
-
+      this.setUnfocused(section);
     }
 
   },
@@ -61,9 +54,7 @@ export default View.extend({
    * @param {Object} e
    */
   onLeave: function(e) {
-    let section = $(e.currentTarget);
-    section.off('click');
-    section.removeClass('unfocused');
+    this.setFocused($(e.currentTarget));
   },
 
 
@@ -85,6 +76,8 @@ export default View.extend({
       duration: styles.duration
     });
 
+    this.setFocused(section);
+
   },
 
 
@@ -95,6 +88,36 @@ export default View.extend({
    */
   getSectionBySlug: function(slug) {
     return this.$(`.section[data-slug=${slug}]`);
+  },
+
+
+  /**
+   * Set a section unfocused.
+   *
+   * @param {Object} section
+   */
+  setUnfocused: function(section) {
+
+    // Add class.
+    section.addClass('unfocused');
+
+    // Select on click.
+    section.click(e => {
+      let slug = section.attr('data-slug');
+      this.channels.sections.trigger('select', slug);
+    });
+
+  },
+
+
+  /**
+   * Set a section focused.
+   *
+   * @param {Object} section
+   */
+  setFocused: function(section) {
+    section.off('click');
+    section.removeClass('unfocused');
   },
 
 
