@@ -31,6 +31,7 @@ export default Controller.extend({
 
   requests: {
     burialOffset: 'getBurialOffset',
+    sectionFocused: 'isSectionFocused',
   },
 
 
@@ -140,9 +141,21 @@ export default Controller.extend({
    * Get the window-space offset of a burial marker.
    *
    * @param {Number} id
+   * @returns {Array}
    */
   getBurialOffset: function(id) {
     return this.view.getBurialOffset(id);
+  },
+
+
+  /**
+   * Is the section for a given slug focused?
+   *
+   * @param {String} slug
+   * @returns {Boolean}
+   */
+  isSectionFocused: function(slug) {
+    return this.view.isSectionFocused(slug);
   },
 
 

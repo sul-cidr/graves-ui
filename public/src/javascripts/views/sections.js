@@ -17,6 +17,9 @@ export default View.extend({
   },
 
 
+  channels: ['map'],
+
+
   /**
    * Select sections.
    */
@@ -31,7 +34,24 @@ export default View.extend({
    * @param {Object} e
    */
   onEnter: function(e) {
-    console.log(e);
+
+    let section = $(e.currentTarget);
+    let slug = section.attr('data-slug');
+
+    // Is the section focused on the map?
+    let focused = this.channels.map.request('sectionFocused', slug);
+
+    if (!focused) {
+
+      section.addClass('unfocused');
+
+      // TODO: Click to select.
+      section.click(e => {
+        console.log('select');
+      });
+
+    }
+
   },
 
 
@@ -41,7 +61,9 @@ export default View.extend({
    * @param {Object} e
    */
   onLeave: function(e) {
-    console.log(e);
+    let section = $(e.currentTarget);
+    section.off('click');
+    section.removeClass('unfocused');
   },
 
 

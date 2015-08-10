@@ -43,3 +43,6 @@ section:
     <<: *default
     color: orange
     weight: 2
+
+focus:
+  threshold: 500000

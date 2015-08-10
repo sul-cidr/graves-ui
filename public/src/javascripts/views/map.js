@@ -399,6 +399,7 @@ export default View.extend({
    * Get the window-space offset of a burial marker.
    *
    * @param {Number} id
+   * @return {Array}
    */
   getBurialOffset: function(id) {
 
@@ -412,6 +413,27 @@ export default View.extend({
     let point = this.map.layerPointToContainerPoint(layerPoint);
 
     return [point.x, point.y];
+
+  },
+
+
+  /**
+   * Is a section "focused" on the screen?
+   *
+   * @param {String} slug
+   * @return {Boolean}
+   */
+  isSectionFocused: function(slug) {
+
+    // Get section and map centers.
+    let sCenter = this.slugToBox[slug].getBounds().getCenter();
+    let mCenter = this.map.getCenter();
+
+    // Measure distance to section center.
+    // TODO: Make this more robust?
+    let d = mCenter.distanceTo(sCenter);
+
+    return d < styles.focus.threshold;
 
   },
 
