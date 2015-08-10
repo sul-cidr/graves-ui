@@ -3,6 +3,7 @@
 import $ from 'jquery';
 import View from '../lib/view';
 import * as styles from './sections.yml';
+import tipTpl from './tip.jade'
 
 
 export default View.extend({
@@ -107,6 +108,19 @@ export default View.extend({
       this.channels.sections.trigger('select', slug);
     });
 
+    // Inject the tooltip.
+    this.tip = $(tipTpl({
+      content: 'Click to focus on section'
+    }));
+
+    this.tip.appendTo('body');
+
+    this.$el.mousemove(e => {
+      let y = e.clientY;
+      let x = this.$el.offset().left + this.$el.outerWidth() + 10;
+      this.tip.css({ top: y, left: x });
+    });
+
   },
 
 
@@ -118,6 +132,7 @@ export default View.extend({
   setFocused: function(section) {
     section.off('click');
     section.removeClass('unfocused');
+    this.tip.remove();
   },
 
 

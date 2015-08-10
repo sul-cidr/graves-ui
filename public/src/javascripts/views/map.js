@@ -7,7 +7,6 @@ import wellknown from 'wellknown';
 import * as omnivore from 'leaflet-omnivore'
 import {swap} from '../utils'
 import * as styles from './map.yml';
-import burialTpl from './burial.jade'
 import View from '../lib/view';
 
 
