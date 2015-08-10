@@ -24,9 +24,6 @@ export default Controller.extend({
   },
 
 
-  channels: ['map'],
-
-
   /**
    * By default, no line.
    */
