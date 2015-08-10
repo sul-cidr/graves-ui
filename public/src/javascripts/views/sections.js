@@ -1,5 +1,6 @@
 
 
+import _ from 'lodash';
 import $ from 'jquery';
 import View from '../lib/view';
 import * as styles from './sections.yml';
@@ -22,10 +23,32 @@ export default View.extend({
 
 
   /**
-   * Select sections.
+   * Start the sections.
    */
   initialize: function() {
-    this.sections = this.$('.section');
+    this._initOffset();
+  },
+
+
+  /**
+   * Set offset on resize.
+   */
+  _initOffset: function() {
+
+    this.setOffset();
+
+    // Re-cache on resize.
+    let resize = _.debounce(this.setOffset.bind(this), 500);
+    $(window).resize(resize);
+
+  },
+
+
+  /**
+   * Cache offset of the right boundary of the container.
+   */
+  setOffset: function() {
+    this.rightX = this.$el.offset().left + this.$el.outerWidth() + 10;
   },
 
 
@@ -116,9 +139,7 @@ export default View.extend({
     this.tip.appendTo('body');
 
     this.$el.mousemove(e => {
-      let y = e.clientY;
-      let x = this.$el.offset().left + this.$el.outerWidth() + 10;
-      this.tip.css({ top: y, left: x });
+      this.tip.css({ top: e.clientY, left: this.rightX });
     });
 
   },
