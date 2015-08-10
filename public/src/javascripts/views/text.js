@@ -3,6 +3,7 @@
 import _ from 'lodash';
 import $ from 'jquery';
 import View from '../lib/view';
+import * as styles from './text.yml';
 
 
 export default View.extend({
@@ -114,7 +115,16 @@ export default View.extend({
    * @param {String} slug
    */
   selectSection: function(slug) {
-    // TODO
+
+    let section = this.getSectionBySlug(slug);
+
+    // Scroll to the section.
+    this.$el.animate({
+      scrollTop: section[0].offsetTop
+    }, {
+      duration: styles.duration
+    });
+
   },
 
 
@@ -138,6 +148,16 @@ export default View.extend({
    */
   getBurialsById: function(id) {
     return this.$(`span.burial[data-id=${id}]`)
+  },
+
+
+  /**
+   * Get a section by slug.
+   *
+   * @param {String} slug
+   */
+  getSectionBySlug: function(slug) {
+    return this.$(`.section[data-slug=${slug}]`);
   },
 
 
