@@ -45,6 +45,7 @@ export default Controller.extend({
    */
   initialize: function() {
     this.view = new Map();
+    this.listen();
   },
 
 

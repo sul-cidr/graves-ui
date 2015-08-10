@@ -28,6 +28,7 @@ export default Controller.extend({
    */
   initialize: function() {
     this.view = new Text();
+    this.listen();
   },
 
 

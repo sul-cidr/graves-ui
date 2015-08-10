@@ -9,7 +9,6 @@ export default Controller.extend({
 
   events: {
     data: {
-      provinces: 'ingestProvinces',
       burials: 'ingestBurials',
     }
   },
@@ -20,16 +19,7 @@ export default Controller.extend({
    */
   initialize: function() {
     this.view = new MiniMap();
-  },
-
-
-  /**
-   * Ingest provinces.
-   *
-   * @param {Object} provinces
-   */
-  ingestProvinces: function(provinces) {
-    this.view.ingestProvinces(provinces);
+    this.listen();
   },
 
 

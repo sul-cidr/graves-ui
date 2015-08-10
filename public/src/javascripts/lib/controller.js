@@ -18,14 +18,20 @@ var Controller = function(options={}) {
     this.initialize(this.options);
   }
 
-  this._bindEvents();
-  this._bindRequests();
-
 };
 
 
 // Patch in Backbone's `extend`.
 Controller.extend = Backbone.Model.extend;
+
+
+/**
+ * Bind all mappings.
+ */
+Controller.prototype.listen = function() {
+  this._bindEvents();
+  this._bindRequests();
+};
 
 
 /**
