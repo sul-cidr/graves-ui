@@ -13,10 +13,10 @@ export default View.extend({
 
   events: {
 
-    // Spans:
-    'mouseenter span.burial': 'onSpanEnter',
-    'mouseleave span.burial': 'onSpanLeave',
-    'click span.burial': 'onSpanClick',
+    // Burials:
+    'mouseenter span.burial': 'onBurialEnter',
+    'mouseleave span.burial': 'onBurialLeave',
+    'click span.burial': 'onBurialClick',
 
     // Sections:
     'mouseenter .section': 'onSectionEnter',
@@ -25,13 +25,21 @@ export default View.extend({
   },
 
 
+  channels: ['text', 'burials', 'sections'],
+
+
+  // ** Publishers:
+
+
   /**
    * When the cursor enters a span.
    *
    * @param {Object} e
    */
-  onSpanEnter: function(e) {
-    // TODO
+  onBurialEnter: function(e) {
+    let id = this.getBurialIdFromEvent(e);
+    this.channels.burials.trigger('highlight', id);
+    this.channels.text.trigger('hover', e);
   },
 
 
@@ -40,8 +48,9 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onSpanLeave: function(e) {
-    // TODO
+  onBurialLeave: function(e) {
+    let id = this.getBurialIdFromEvent(e);
+    this.channels.burials.trigger('unhighlight', id);
   },
 
 
@@ -50,8 +59,9 @@ export default View.extend({
    *
    * @param {Object} e
    */
-  onSpanClick: function(e) {
-    // TODO
+  onBurialClick: function(e) {
+    let id = this.getBurialIdFromEvent(e);
+    this.channels.burials.trigger('select', id);
   },
 
 
@@ -72,6 +82,62 @@ export default View.extend({
    */
   onSectionLeave: function(e) {
     // TODO
+  },
+
+
+  // ** Renderers:
+
+
+  /**
+   * Highlight burial spans.
+   *
+   * @param {Number} id
+   */
+  highlightBurial: function(id) {
+    this.getBurialsById(id).addClass('highlight');
+  },
+
+
+  /**
+   * Unhighlight burial spans.
+   *
+   * @param {Number} id
+   */
+  unhighlightBurial: function(id) {
+    this.getBurialsById(id).removeClass('highlight');
+  },
+
+
+  /**
+   * Unhighlight burial spans.
+   *
+   * @param {String} slug
+   */
+  selectSection: function(slug) {
+    // TODO
+  },
+
+
+  // ** Helpers:
+
+
+  /**
+   * Get a burial ID from a cursor event.
+   *
+   * @param {Number} id
+   */
+  getBurialIdFromEvent: function(e) {
+    return Number($(e.currentTarget).attr('data-id'));
+  },
+
+
+  /**
+   * Get burial spans by id.
+   *
+   * @param {Number} id
+   */
+  getBurialsById: function(id) {
+    return this.$(`span.burial[data-id=${id}]`)
   },
 
 

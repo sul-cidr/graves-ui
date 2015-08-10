@@ -9,8 +9,8 @@ export default Controller.extend({
 
   events: {
 
-    spans: {
-      enter: 'onShow'
+    text: {
+      hover: 'onShow'
     },
 
     burials: {

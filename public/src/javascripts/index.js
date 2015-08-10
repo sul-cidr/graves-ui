@@ -1,12 +1,10 @@
 
 
 import Map from './controllers/map';
-import Spans from './controllers/spans';
+import Text from './controllers/text';
 import Line from './controllers/line';
-import Sections from './controllers/sections';
 
 
 new Map();
-new Spans();
+new Text();
 new Line();
-new Sections();
