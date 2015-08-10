@@ -35,6 +35,7 @@ export default View.extend({
 
     this.map = L.map(this.el, {
       zoomControl: false,
+      attributionControl: false,
       fadeAnimation: false,
     });
 
