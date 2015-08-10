@@ -4,6 +4,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 import View from '../lib/view';
 import * as styles from './text.yml';
+import tipTpl from './tip.jade'
 
 
 export default View.extend({
@@ -26,7 +27,7 @@ export default View.extend({
   },
 
 
-  channels: ['text', 'burials', 'sections'],
+  channels: ['text', 'burials', 'sections', 'map'],
 
 
   // ** Publishers:
@@ -72,8 +73,21 @@ export default View.extend({
    * @param {Object} e
    */
   onSectionEnter: function(e) {
+
+    // Publish the highlight event.
     let slug = this.getSectionSlugFromEvent(e);
     this.channels.sections.trigger('highlight', slug);
+
+    // Is the section focused on the map?
+    let focused = this.channels.map.request(
+      'sectionFocused', slug
+    );
+
+    // If not, flip on click-to-select.
+    if (!focused) {
+      this.enableSelect(this.getSectionBySlug(slug));
+    }
+
   },
 
 
@@ -83,8 +97,14 @@ export default View.extend({
    * @param {Object} e
    */
   onSectionLeave: function(e) {
+
+    // Publish the unhighlight event.
     let slug = this.getSectionSlugFromEvent(e);
     this.channels.sections.trigger('unhighlight', slug);
+
+    // Disable selection.
+    this.disableSelect(this.getSectionBySlug(slug));
+
   },
 
 
@@ -147,6 +167,44 @@ export default View.extend({
       duration: styles.duration
     });
 
+  },
+
+
+  // ** State:
+
+
+  /**
+   * Set a section "unfocused" - click to select, show tooltip.
+   *
+   * @param {Object} section
+   */
+  enableSelect: function(section) {
+
+    // Click to select.
+    section.click(e => {
+      let slug = section.attr('data-slug');
+      this.channels.sections.trigger('select', slug);
+    });
+
+    // Inject the tooltip.
+    this.tip = $(tipTpl()).appendTo('body');
+
+    // TODO
+    this.$el.mousemove(e => {
+      this.tip.css();
+    });
+
+  },
+
+
+  /**
+   * Flip off click-to-select / tooltip.
+   *
+   * @param {Object} section
+   */
+  disableSelect: function(section) {
+    section.off('click');
+    this.tip.remove();
   },
 
 
