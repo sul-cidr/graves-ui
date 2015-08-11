@@ -26,6 +26,19 @@ export default class MiniDoc {
     // Inject the SVG container.
     this.svg = this.source.append('svg');
 
+    this.plugins = [];
+
+  }
+
+
+  /**
+   * Register a plugin instance.
+   *
+   * @param {Plugin} plugin
+   */
+  add(plugin) {
+    this.plugins.push(plugin);
+    plugin.setDoc(this);
   }
 
 

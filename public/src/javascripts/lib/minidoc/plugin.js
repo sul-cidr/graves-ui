@@ -4,12 +4,12 @@ export default class Plugin {
 
 
   /**
-   * Add the plugin to a MiniMap.
+   * Set the parent MiniDoc.
    *
    * @param {MiniMap} minimap
    */
-  addTo(minidoc) {
-    // TODO
+  setDoc(minidoc) {
+    this.minidoc = minidoc;
   }
 
 

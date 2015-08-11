@@ -20,7 +20,7 @@ export default View.extend({
 
     // Render burials.
     let burials = new DivGroup('span.burial');
-    burials.addTo(this.doc);
+    this.doc.add(burials);
 
   },
 
