@@ -31,8 +31,8 @@ export default View.extend({
     this._initLeaflet();
     this._initEvents();
     this._initProvinces();
-    this._initBurials();
     this._initSections();
+    this._initBurials();
 
   },
 
@@ -101,9 +101,6 @@ export default View.extend({
     // Add feature group to map.
     this.counties = L.featureGroup(features);
     this.counties.addTo(this.map);
-
-    // Move below points.
-    this.counties.bringToBack();
 
   },
 
