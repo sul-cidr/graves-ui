@@ -32,7 +32,12 @@ export default View.extend({
    * Plot the Chinese borders.
    */
   _initChina: function() {
-    // TODO
+
+    this.svg
+    .append('path')
+    .datum(this.data.china)
+    .attr('d', d3.geo.path().projection(d3.geo.mercator()));
+
   },
 
 
