@@ -40,19 +40,19 @@ export default View.extend({
    */
   _initPosition: function() {
 
-    this.setPosition();
+    this.cachePosition();
 
     // Re-cache on resize.
-    let resize = _.debounce(this.setPosition.bind(this), 500);
+    let resize = _.debounce(this.cachePosition.bind(this), 500);
     $(window).resize(resize);
 
   },
 
 
   /**
-   * On resize, cache container boundaries.
+   * Cache container boundaries.
    */
-  setPosition: function() {
+  cachePosition: function() {
     this.offset = this.$el.offset();
     this.width  = this.$el.outerWidth();
     this.rightX = this.offset.left + this.width;
