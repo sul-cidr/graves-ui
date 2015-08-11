@@ -48,10 +48,8 @@ export default Controller.extend({
    * Update the map extent box.
    */
   onMapMove: function() {
-
-    // Get the visible extent on the map.
     let extent = Radio.channel('map').request('visibleExtent');
-
+    this.view.setExtent(extent);
   },
 
 

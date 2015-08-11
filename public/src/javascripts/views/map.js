@@ -454,8 +454,8 @@ export default View.extend({
     let wh = w.height();
 
     return {
-      topLeft: this.map.containerPointToLatLng([tw, 0]),
-      bottomRight: this.map.containerPointToLatLng([ww, wh]),
+      c1: this.map.containerPointToLatLng([tw, 0]),
+      c2: this.map.containerPointToLatLng([ww, wh]),
     };
 
   },

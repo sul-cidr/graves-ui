@@ -21,11 +21,9 @@ export default View.extend({
     this.svg = d3.select(this.el);
 
     this._initChina();
+    this._initMarkup();
 
   },
-
-
-  // ** Features:
 
 
   /**
@@ -46,9 +44,48 @@ export default View.extend({
       .projection(this.projection);
 
     this.svg
-    .append('path')
-    .datum(this.data.china)
-    .attr('d', path);
+      .append('path')
+      .datum(this.data.china)
+      .attr('d', path);
+
+  },
+
+
+  /**
+   * Inject the UI elements.
+   */
+  _initMarkup: function() {
+
+    // Extent <rect>.
+    this.extent = this.svg.append('rect')
+      .classed({ extent: true });
+
+  },
+
+
+  /**
+   * Position the extent box.
+   *
+   * @param {Object} extent
+   */
+  setExtent: function(extent) {
+
+    let c1 = this.projection([
+      extent.c1.lng,
+      extent.c1.lat,
+    ]);
+
+    let c2 = this.projection([
+      extent.c2.lng,
+      extent.c2.lat,
+    ]);
+
+    this.extent.attr({
+      x:      c1[0],
+      y:      c1[1],
+      height: c2[1]-c1[1],
+      width:  c2[0]-c1[0],
+    });
 
   },
 
