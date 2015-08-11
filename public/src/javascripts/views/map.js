@@ -27,6 +27,7 @@ export default View.extend({
   initialize: function(data) {
     this._initLeaflet();
     this._initEvents();
+    this._initViewport();
   },
 
 
@@ -74,6 +75,38 @@ export default View.extend({
     this.map.on('move', () => {
       this.channels.map.trigger('move');
     });
+
+  },
+
+
+  /**
+   * On resize, cache screen coordiantes of the viewport box.
+   */
+  _initViewport: function() {
+
+    this.cacheViewport();
+
+    // Re-cache on resize.
+    let resize = _.debounce(this.cacheViewport.bind(this), 500);
+    $(window).resize(resize);
+
+  },
+
+
+  /**
+   * Cache the top left and bottom right corners of the viewport.
+   */
+  cacheViewport: function() {
+
+    let t = $('#text');
+    let w = $(window);
+
+    let tw = t.offset().left + t.outerWidth();
+    let ww = w.width();
+    let wh = w.height();
+
+    this.topLeft = [tw, 0];
+    this.bottomRight = [ww, wh];
 
   },
 
@@ -441,22 +474,13 @@ export default View.extend({
   /**
    * Get the visible extent of the map.
    *
-   * @return {?}
+   * @return {Object}
    */
   getVisibleExtent: function(slug) {
-
-    let t = $('#text');
-    let w = $(window);
-
-    let tw = t.offset().left + t.outerWidth();
-    let ww = w.width();
-    let wh = w.height();
-
     return {
-      c1: this.map.containerPointToLatLng([tw, 0]),
-      c2: this.map.containerPointToLatLng([ww, wh]),
+      c1: this.map.containerPointToLatLng(this.topLeft),
+      c2: this.map.containerPointToLatLng(this.bottomRight),
     };
-
   },
 
 
