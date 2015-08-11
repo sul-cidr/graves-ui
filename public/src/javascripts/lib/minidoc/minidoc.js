@@ -1,10 +1,14 @@
 
 
+import d3 from 'd3';
+import $ from 'jquery';
+
+
 class MiniDoc {
 
 
   /**
-   * Wrap the source/target selections, inject markup.
+   * Select the source / target elements, inject markup.
    *
    * @param {String} source - A CSS selector for the element that's being
    * represented on the mini doc.
@@ -13,7 +17,18 @@ class MiniDoc {
    * contain the rendered mini doc.
    */
   constructor(source, target) {
-    // TODO
+
+    // d3 containers.
+    this.source = d3.select(source);
+    this.target = d3.select(target);
+
+    // jQuery containers.
+    this.$source = $(source);
+    this.$target = $(target);
+
+    // Inject the SVG container.
+    this.svg = this.source.append('svg');
+
   }
 
 
