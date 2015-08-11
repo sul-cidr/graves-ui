@@ -34,6 +34,7 @@ export default Controller.extend({
   requests: {
     burialOffset: 'getBurialOffset',
     sectionFocused: 'isSectionFocused',
+    visibleExtent: 'getVisibleExtent',
   },
 
 
@@ -140,6 +141,16 @@ export default Controller.extend({
    */
   isSectionFocused: function(slug) {
     return this.view.isSectionFocused(slug);
+  },
+
+
+  /**
+   * Get the visible extent rectangle.
+   *
+   * @returns {Object}
+   */
+  getVisibleExtent: function(slug) {
+    return this.view.getVisibleExtent();
   },
 
 

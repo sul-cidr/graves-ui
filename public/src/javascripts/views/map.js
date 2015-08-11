@@ -77,6 +77,7 @@ export default View.extend({
    */
   _initEvents: function() {
 
+    // Notify move.
     this.map.on('move', () => {
       this.channels.map.trigger('move');
     });
@@ -434,6 +435,28 @@ export default View.extend({
     let d = mCenter.distanceTo(sCenter);
 
     return d < styles.focus.threshold;
+
+  },
+
+
+  /**
+   * Get the visible extent of the map.
+   *
+   * @return {?}
+   */
+  getVisibleExtent: function(slug) {
+
+    let t = $('#text');
+    let w = $(window);
+
+    let tw = t.offset().left + t.outerWidth();
+    let ww = w.width();
+    let wh = w.height();
+
+    return {
+      topLeft: this.map.containerPointToLatLng([tw, 0]),
+      bottomRight: this.map.containerPointToLatLng([ww, wh]),
+    };
 
   },
 
