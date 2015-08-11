@@ -1,7 +1,8 @@
 
 
 import View from '../lib/view';
-import MiniDoc from '../lib/minidoc/minidoc';
+import MiniDoc from '../lib/minidoc/mini-doc';
+import DivGroup from '../lib/minidoc/div-group';
 
 
 export default View.extend({
@@ -14,7 +15,13 @@ export default View.extend({
    * Start the minidoc.
    */
   initialize: function() {
+
     this.doc = new MiniDoc('#text', this.el);
+
+    // Render burials.
+    let burials = new DivGroup('span.burial');
+    burials.addTo(this.doc);
+
   },
 
 
