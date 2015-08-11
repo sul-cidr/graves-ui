@@ -10,14 +10,15 @@ export default class Plugin {
    */
   setDoc(minidoc) {
     this.minidoc = minidoc;
+    this.mount();
   }
 
 
   /**
-   * Called when the source element re-flows.
+   * Apply the plugin.
    */
-  onResize() {
-    // TODO
+  mount() {
+    throw new Error('Method not implemented');
   }
 
 

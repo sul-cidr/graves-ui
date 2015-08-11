@@ -1,5 +1,6 @@
 
 
+import $ from 'jquery';
 import Controller from '../lib/controller';
 import MiniDoc from '../views/mini-doc';
 
@@ -14,8 +15,10 @@ export default Controller.extend({
    * Start the view.
    */
   initialize: function() {
-    this.view = new MiniDoc();
-    this.start();
+    $(window).load(() => {
+      this.view = new MiniDoc();
+      this.start();
+    });
   },
 
 

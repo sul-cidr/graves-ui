@@ -18,8 +18,12 @@ export default View.extend({
 
     this.doc = new MiniDoc('#text', this.el);
 
+    // Render <p>'s.
+    let sections = new DivGroup('.section', 'section');
+    this.doc.add(sections);
+
     // Render burials.
-    let burials = new DivGroup('span.burial');
+    let burials = new DivGroup('span.burial', 'burial');
     this.doc.add(burials);
 
   },

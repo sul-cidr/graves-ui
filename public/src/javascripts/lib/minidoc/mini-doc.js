@@ -24,7 +24,7 @@ export default class MiniDoc {
     this.$target = $(target);
 
     // Inject the SVG container.
-    this.svg = this.source.append('svg');
+    this.svg = this.target.append('svg');
 
     this.plugins = [];
 
@@ -39,6 +39,16 @@ export default class MiniDoc {
   add(plugin) {
     this.plugins.push(plugin);
     plugin.setDoc(this);
+  }
+
+
+  /**
+   * Get a multiplier to convert source pixels -> target pixels.
+   *
+   * @return {Number}
+   */
+  getTargetRatio() {
+    return this.$target.outerWidth() / this.$source.outerWidth();
   }
 
 
