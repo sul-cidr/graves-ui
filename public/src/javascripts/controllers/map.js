@@ -5,6 +5,7 @@ import Radio from 'backbone.radio';
 import Controller from '../lib/controller';
 import Map from '../views/map';
 import sections from '../data/sections.yml';
+import {waitOnce} from '../utils';
 
 
 export default Controller.extend({
@@ -41,21 +42,9 @@ export default Controller.extend({
    */
   initialize: function() {
 
-    let data = Radio.channel('data');
-
-    // Wait for provinces to load.
-    let getProvinces = new Promise((resolve, reject) => {
-      data.once('provinces', resolve);
-    });
-
-    // Wait for burials to load.
-    let getBurials = new Promise((resolve, reject) => {
-      data.once('burials', resolve);
-    });
-
     Promise.all([
-      getProvinces,
-      getBurials
+      waitOnce('data', 'provinces'),
+      waitOnce('data', 'burials')
     ]).then(res => {
 
       // Start the view.

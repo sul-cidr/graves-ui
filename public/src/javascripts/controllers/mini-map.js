@@ -4,6 +4,7 @@ import Radio from 'backbone.radio';
 import Controller from '../lib/controller';
 import MiniMap from '../views/mini-map';
 import china from '../data/CHN.geo.json';
+import {waitOnce} from '../utils';
 
 
 export default Controller.extend({
@@ -21,7 +22,7 @@ export default Controller.extend({
       data.once('burials', resolve);
     });
 
-    getBurials.then(burials => {
+    waitOnce('data', 'burials').then(burials => {
 
       // Start the view.
       this.view = new MiniMap({
