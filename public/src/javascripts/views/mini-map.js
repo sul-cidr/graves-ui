@@ -38,12 +38,12 @@ export default View.extend({
       this.$el.height()/2
     ];
 
-    let projection = d3.geo.mercator()
+    this.projection = d3.geo.mercator()
       .center(d3.geo.centroid(this.data.china))
       .translate(offset);
 
     let path = d3.geo.path()
-      .projection(projection);
+      .projection(this.projection);
 
     this.svg
     .append('path')

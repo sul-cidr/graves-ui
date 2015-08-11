@@ -10,6 +10,13 @@ import {waitOnce} from '../utils';
 export default Controller.extend({
 
 
+  events: {
+    map: {
+      move: 'onMapMove'
+    }
+  },
+
+
   /**
    * Start the view.
    */
@@ -34,6 +41,14 @@ export default Controller.extend({
 
     });
 
+  },
+
+
+  /**
+   * Update the map extent box.
+   */
+  onMapMove: function() {
+    // TODO
   },
 
 
