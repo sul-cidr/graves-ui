@@ -1,8 +1,10 @@
 
 
 import $ from 'jquery';
+import Radio from 'backbone.radio';
 import Controller from '../lib/controller';
 import Map from '../views/map';
+import sections from '../data/sections.yml';
 
 
 export default Controller.extend({
@@ -12,12 +14,6 @@ export default Controller.extend({
 
 
   events: {
-
-    data: {
-      provinces: 'ingestProvinces',
-      burials: 'ingestBurials',
-      sections: 'ingestSections',
-    },
 
     burials: {
       highlight: 'onHighlightBurial',
@@ -44,38 +40,35 @@ export default Controller.extend({
    * Start the view.
    */
   initialize: function() {
-    this.view = new Map();
-    this.listen();
-  },
 
+    let data = Radio.channel('data');
 
-  /**
-   * Ingest provinces.
-   *
-   * @param {Object} provinces
-   */
-  ingestProvinces: function(provinces) {
-    this.view.ingestProvinces(provinces);
-  },
+    // Wait for provinces to load.
+    let getProvinces = new Promise((resolve, reject) => {
+      data.once('provinces', resolve);
+    });
 
+    // Wait for burials to load.
+    let getBurials = new Promise((resolve, reject) => {
+      data.once('burials', resolve);
+    });
 
-  /**
-   * Load burial sites.
-   *
-   * @param {Object} burials
-   */
-  ingestBurials: function(burials) {
-    this.view.ingestBurials(burials);
-  },
+    Promise.all([
+      getProvinces,
+      getBurials
+    ]).then(res => {
 
+      // Start the view.
+      this.view = new Map({
+        provinces: res[0],
+        burials: res[1],
+        sections: sections,
+      });
 
-  /**
-   * Load section regions.
-   *
-   * @param {Object} sections
-   */
-  ingestSections: function(sections) {
-    this.view.ingestSections(sections);
+      this.listen();
+
+    });
+
   },
 
 

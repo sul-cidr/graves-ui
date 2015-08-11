@@ -21,10 +21,19 @@ export default View.extend({
 
   /**
    * Start the map.
+   *
+   * @param {Object} data
    */
-  initialize: function() {
+  initialize: function(data) {
+
+    this.data = data;
+
     this._initLeaflet();
     this._initEvents();
+    this._initProvinces();
+    this._initBurials();
+    this._initSections();
+
   },
 
 
@@ -80,13 +89,11 @@ export default View.extend({
 
   /**
    * Plot provinces.
-   *
-   * @param {Object} data
    */
-  ingestProvinces: function(data) {
+  _initProvinces: function() {
 
     // Parse WKT -> GeoJSON.
-    let features = data.map(c => {
+    let features = this.data.provinces.map(c => {
       let points = wellknown(c.geom);
       return new L.GeoJSON(points, styles.province);
     });
@@ -103,15 +110,13 @@ export default View.extend({
 
   /**
    * Plot burials.
-   *
-   * @param {Object} data
    */
-  ingestBurials: function(data) {
+  _initBurials: function() {
 
     this.idToBurial = {};
 
     // Parse WKT -> GeoJSON.
-    let features = data.map(b => {
+    let features = this.data.burials.map(b => {
 
       // Extract the lon/lat.
       let point = wellknown(b.geom).coordinates[0];
@@ -167,16 +172,14 @@ export default View.extend({
 
   /**
    * Draw section rectangles.
-   *
-   * @param {Object} data
    */
-  ingestSections: function(data) {
+  _initSections: function() {
 
     this.slugToLabel = {};
     this.slugToBox = {};
 
     let labels = [], boxes = [];
-    for (let s of data) {
+    for (let s of this.data.sections) {
 
       // ** Create the box.
 

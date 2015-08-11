@@ -18,9 +18,7 @@ export default Controller.extend({
 
     // Wait for the burials to load.
     let getBurials = new Promise((resolve, reject) => {
-      data.once('burials', json => {
-        resolve(json);
-      });
+      data.once('burials', resolve);
     });
 
     getBurials.then(burials => {
