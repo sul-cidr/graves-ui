@@ -4,7 +4,7 @@ import d3 from 'd3';
 import $ from 'jquery';
 
 
-class MiniDoc {
+export default class MiniDoc {
 
 
   /**
