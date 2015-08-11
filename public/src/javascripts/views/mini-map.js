@@ -33,10 +33,22 @@ export default View.extend({
    */
   _initChina: function() {
 
+    let offset = [
+      this.$el.width()/2,
+      this.$el.height()/2
+    ];
+
+    let projection = d3.geo.mercator()
+      .center(d3.geo.centroid(this.data.china))
+      .translate(offset);
+
+    let path = d3.geo.path()
+      .projection(projection);
+
     this.svg
     .append('path')
     .datum(this.data.china)
-    .attr('d', d3.geo.path().projection(d3.geo.mercator()));
+    .attr('d', path);
 
   },
 
