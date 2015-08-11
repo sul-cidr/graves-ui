@@ -27,7 +27,17 @@ export default class MiniDoc {
     this.svg = this.target.append('svg');
 
     this.plugins = [];
+    this.resize();
 
+  }
+
+
+  /**
+   * Set the SVG container size.
+   */
+  resize() {
+    let height = this.getTargetPx(this.$source[0].scrollHeight);
+    this.svg.style('height', height);
   }
 
 
@@ -49,6 +59,17 @@ export default class MiniDoc {
    */
   getTargetRatio() {
     return this.$target.outerWidth() / this.$source.outerWidth();
+  }
+
+
+  /**
+   * Scale source pixels -> target pixels.
+   *
+   * @param {Number} sourcePx
+   * @return {Number}
+   */
+  getTargetPx(sourcePx) {
+    return this.getTargetRatio() * sourcePx;
   }
 
 

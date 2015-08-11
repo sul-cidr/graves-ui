@@ -20,7 +20,7 @@ export default View.extend({
 
     // Render <p>'s.
     let sections = new DivGroup('.section', 'section');
-    this.doc.add(sections);
+  this.doc.add(sections);
 
     // Render burials.
     let burials = new DivGroup('span.burial', 'burial');
