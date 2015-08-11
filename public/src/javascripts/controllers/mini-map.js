@@ -12,6 +12,7 @@ export default Controller.extend({
 
   events: {
     map: {
+      started: 'onMapMove',
       move: 'onMapMove'
     }
   },

@@ -57,6 +57,9 @@ export default Controller.extend({
 
       this.listen();
 
+      // Notify map started.
+      this.channel.trigger('started');
+
     });
 
   },
@@ -149,7 +152,7 @@ export default Controller.extend({
    *
    * @returns {Object}
    */
-  getVisibleExtent: function(slug) {
+  getVisibleExtent: function() {
     return this.view.getVisibleExtent();
   },
 
