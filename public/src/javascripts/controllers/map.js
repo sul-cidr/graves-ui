@@ -43,22 +43,19 @@ export default Controller.extend({
    */
   initialize: function() {
 
+    this.view = new Map();
+
     Promise.all([
       waitOnce('data', 'provinces'),
       waitOnce('data', 'burials')
     ]).then(res => {
 
-      // Start the view.
-      this.view = new Map({
-        provinces: res[0],
-        burials: res[1],
-        sections: sections,
-      });
+      // Render data.
+      this.view.ingestProvinces(res[0]);
+      this.view.ingestSections(sections);
+      this.view.ingestBurials(res[1]);
 
-      this.listen();
-
-      // Notify map started.
-      this.channel.trigger('started');
+      this.start();
 
     });
 

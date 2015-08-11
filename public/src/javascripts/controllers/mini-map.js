@@ -41,7 +41,7 @@ export default Controller.extend({
         burials: burials
       });
 
-      this.listen();
+      this.start();
 
     });
 

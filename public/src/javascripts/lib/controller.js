@@ -33,11 +33,12 @@ Controller.extend = Backbone.Model.extend;
 
 
 /**
- * Bind all mappings.
+ * Bind all mappings, notify started.
  */
-Controller.prototype.listen = function() {
-  this._bindEvents();
+Controller.prototype.start = function() {
   this._bindRequests();
+  this._bindEvents();
+  this.channel.trigger('started');
 };
 
 

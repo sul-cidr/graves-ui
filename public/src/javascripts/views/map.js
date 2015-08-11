@@ -25,15 +25,8 @@ export default View.extend({
    * @param {Object} data
    */
   initialize: function(data) {
-
-    this.data = data;
-
     this._initLeaflet();
     this._initEvents();
-    this._initProvinces();
-    this._initSections();
-    this._initBurials();
-
   },
 
 
@@ -90,11 +83,13 @@ export default View.extend({
 
   /**
    * Plot provinces.
+   *
+   * @param {Object} data
    */
-  _initProvinces: function() {
+  ingestProvinces: function(data) {
 
     // Parse WKT -> GeoJSON.
-    let features = this.data.provinces.map(c => {
+    let features = data.map(c => {
       let points = wellknown(c.geom);
       return new L.GeoJSON(points, styles.province);
     });
@@ -108,13 +103,15 @@ export default View.extend({
 
   /**
    * Plot burials.
+   *
+   * @param {Object} data
    */
-  _initBurials: function() {
+  ingestBurials: function(data) {
 
     this.idToBurial = {};
 
     // Parse WKT -> GeoJSON.
-    let features = this.data.burials.map(b => {
+    let features = data.map(b => {
 
       // Extract the lon/lat.
       let point = wellknown(b.geom).coordinates[0];
@@ -170,14 +167,16 @@ export default View.extend({
 
   /**
    * Draw section rectangles.
+   *
+   * @param {Object} data
    */
-  _initSections: function() {
+  ingestSections: function(data) {
 
     this.slugToLabel = {};
     this.slugToBox = {};
 
     let labels = [], boxes = [];
-    for (let s of this.data.sections) {
+    for (let s of data) {
 
       // ** Create the box.
 

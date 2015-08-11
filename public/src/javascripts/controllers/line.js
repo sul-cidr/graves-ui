@@ -32,7 +32,7 @@ export default Controller.extend({
    */
   initialize: function() {
     this.view = null;
-    this.listen();
+    this.start();
   },
 
 
