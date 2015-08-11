@@ -10,6 +10,9 @@ import {waitOnce} from '../utils';
 export default Controller.extend({
 
 
+  channel: 'mini-map',
+
+
   events: {
     map: {
       started: 'onMapMove',

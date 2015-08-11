@@ -10,17 +10,16 @@ import sections from '../data/sections.yml';
 export default Controller.extend({
 
 
+  channel: 'data',
+
+
   /**
    * Load data on startup.
    */
   initialize: function() {
-
-    this.channel = Radio.channel('data');
-
     this._loadProvinces();
     this._loadBurials();
     this._loadSections();
-
   },
 
 

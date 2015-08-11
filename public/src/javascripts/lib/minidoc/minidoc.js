@@ -10,11 +10,8 @@ class MiniDoc {
   /**
    * Select the source / target elements, inject markup.
    *
-   * @param {String} source - A CSS selector for the element that's being
-   * represented on the mini doc.
-   *
-   * @param {String} target - A CSS selector for the element that should
-   * contain the rendered mini doc.
+   * @param {String} source
+   * @param {String} target
    */
   constructor(source, target) {
 

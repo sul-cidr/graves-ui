@@ -14,6 +14,13 @@ var Controller = function(options={}) {
 
   this.options = options;
 
+  // Set the local channel.
+  if (_.isString(this.channel)) {
+    this.channel = Radio.channel(this.channel);
+  } else {
+    throw new Error('Missing local channel.');
+  }
+
   if (_.isFunction(this.initialize)) {
     this.initialize(this.options);
   }
@@ -61,14 +68,6 @@ Controller.prototype._bindRequests = function() {
 
   // Halt if no requests.
   if (!_.isObject(this.requests)) return;
-
-  // Error if no channel name.
-  else if (!_.isString(this.channel)) {
-    throw new Error('You must provide a local channel name.');
-  }
-
-  // Set the localchannel.
-  this.channel = Radio.channel(this.channel);
 
   // Bind requests -> callbacks.
   _.each(this.requests, (method, request) => {

@@ -7,6 +7,9 @@ import Line from '../views/line';
 export default Controller.extend({
 
 
+  channel: 'line',
+
+
   events: {
 
     text: {

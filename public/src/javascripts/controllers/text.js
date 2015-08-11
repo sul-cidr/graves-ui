@@ -7,6 +7,9 @@ import Text from '../views/text';
 export default Controller.extend({
 
 
+  channel: 'text',
+
+
   events: {
 
     burials: {
