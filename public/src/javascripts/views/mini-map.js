@@ -1,5 +1,6 @@
 
 
+import d3 from 'd3';
 import View from '../lib/view';
 
 
@@ -15,8 +16,12 @@ export default View.extend({
    * @param {Object} data
    */
   initialize: function(data) {
+
     this.data = data;
+    this.svg = d3.select(this.el);
+
     this._initChina();
+
   },
 
 
@@ -27,7 +32,7 @@ export default View.extend({
    * Plot the Chinese borders.
    */
   _initChina: function() {
-    console.log(this.data.china);
+    // TODO
   },
 
 

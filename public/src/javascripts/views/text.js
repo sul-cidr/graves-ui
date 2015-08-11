@@ -196,9 +196,6 @@ export default View.extend({
       duration: styles.duration
     });
 
-    // Disable selection.
-    this.disableSelect(section);
-
   },
 
 
@@ -214,18 +211,19 @@ export default View.extend({
 
     section.addClass('selectable');
 
-    // Click to select.
-    section.click(e => {
-      let slug = section.attr('data-slug');
-      this.channels.sections.trigger('select', slug);
-    });
-
     // Inject the tooltip.
     this.tip = $(tipTpl()).appendTo('body');
 
     // Sync tooltip Y with cursor.
     section.mousemove(e => {
       this.tip.css({ top: e.clientY, left: this.rightX+10 });
+    });
+
+    // Click to select.
+    section.click(e => {
+      let slug = section.attr('data-slug');
+      this.channels.sections.trigger('select', slug);
+      this.disableSelect(section);
     });
 
   },
