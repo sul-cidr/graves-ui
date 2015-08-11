@@ -105,8 +105,12 @@ export default View.extend({
     let ww = w.width();
     let wh = w.height();
 
+    // Cache the corner points.
     this.topLeft = [tw, 0];
     this.bottomRight = [ww, wh];
+
+    // Notify resize.
+    this.channels.map.trigger('resize');
 
   },
 
