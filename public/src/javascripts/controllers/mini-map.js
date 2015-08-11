@@ -1,35 +1,40 @@
 
 
+import Radio from 'backbone.radio';
 import Controller from '../lib/controller';
 import MiniMap from '../views/mini-map';
+import china from '../data/CHN.geo.json';
 
 
 export default Controller.extend({
-
-
-  events: {
-    data: {
-      burials: 'ingestBurials',
-    }
-  },
 
 
   /**
    * Start the view.
    */
   initialize: function() {
-    this.view = new MiniMap();
-    this.listen();
-  },
 
+    let data = Radio.channel('data');
 
-  /**
-   * Load burial sites.
-   *
-   * @param {Object} burials
-   */
-  ingestBurials: function(burials) {
-    this.view.ingestBurials(burials);
+    // Wait for the burials to load.
+    let getBurials = new Promise((resolve, reject) => {
+      data.once('burials', json => {
+        resolve(json);
+      });
+    });
+
+    getBurials.then(burials => {
+
+      // Start the view.
+      this.view = new MiniMap({
+        china: china,
+        burials: burials
+      });
+
+      this.listen();
+
+    });
+
   },
 
 

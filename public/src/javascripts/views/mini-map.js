@@ -11,9 +11,12 @@ export default View.extend({
 
   /**
    * Start the map.
+   *
+   * @param {Object} data
    */
-  initialize: function() {
-    // TODO
+  initialize: function(data) {
+    this.data = data;
+    this._initChina();
   },
 
 
@@ -21,24 +24,10 @@ export default View.extend({
 
 
   /**
-   * Plot provinces.
-   *
-   * @param {Object} data
+   * Plot the Chinese borders.
    */
-  ingestProvinces: function(data) {
-    // TODO
-    console.log(data);
-  },
-
-
-  /**
-   * Plot burials.
-   *
-   * @param {Object} data
-   */
-  ingestBurials: function(data) {
-    // TODO
-    console.log(data);
+  _initChina: function() {
+    console.log(this.data.china);
   },
 
 
