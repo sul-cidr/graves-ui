@@ -3,6 +3,7 @@
 import View from '../lib/view';
 import MiniDoc from '../lib/minidoc/mini-doc';
 import DivGroup from '../lib/minidoc/div-group';
+import Window from '../lib/minidoc/window';
 
 
 export default View.extend({
@@ -25,6 +26,10 @@ export default View.extend({
     // Render burials.
     let burials = new DivGroup('span.burial', 'burial');
     this.doc.add(burials);
+
+    // Add the scroll window.
+    let scrollWindow = new Window();
+    this.doc.add(scrollWindow);
 
   },
 
