@@ -1,7 +1,8 @@
 
 
-import d3 from 'd3';
+import _ from 'lodash';
 import $ from 'jquery';
+import d3 from 'd3';
 
 
 export default class MiniDoc {
@@ -26,7 +27,13 @@ export default class MiniDoc {
     // Inject the SVG container.
     this.svg = this.target.append('svg');
 
+    // Active plugins.
     this.plugins = [];
+
+    // Listen for resize (debounced).
+    let resize = _.debounce(this.resize.bind(this), 500);
+    this.$source.resize(resize);
+
     this.resize();
 
   }
@@ -36,9 +43,18 @@ export default class MiniDoc {
    * Set the SVG container size.
    */
   resize() {
+
+    // Visible height of source -> target height.
     let height = this.getTargetPx(this.$source[0].scrollHeight);
+
+    // Resize the SVG container.
     this.svg.style('height', height);
-    this.$target.css('height', height);
+
+    // Notify plugins.
+    for (let plugin of this.plugins) {
+      plugin.resize();
+    }
+
   }
 
 
