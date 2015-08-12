@@ -38,6 +38,7 @@ export default class MiniDoc {
   resize() {
     let height = this.getTargetPx(this.$source[0].scrollHeight);
     this.svg.style('height', height);
+    this.$target.css('height', height);
   }
 
 

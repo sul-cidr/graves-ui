@@ -55,8 +55,9 @@ export default class Window extends Plugin {
     let scrollTop     = this.minidoc.$source.scrollTop();
     let scrollHeight  = this.minidoc.$source[0].scrollHeight;
     let topHeight     = scrollTop * ratio;
-    let bottomOffset  = (sourceHeight + scrollTop) * ratio;
-    let bottomHeight  = (scrollHeight - (scrollTop + sourceHeight)) * ratio;
+    let sourceBottom  = sourceHeight + scrollTop;
+    let bottomHeight  = (scrollHeight - sourceBottom) * ratio;
+    let bottomOffset  = sourceBottom * ratio;
 
     this.top.attr({
       x: 0,
