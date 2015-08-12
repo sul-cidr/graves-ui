@@ -76,8 +76,8 @@ export default class Pair {
 
     this.target.classed({
       'highlight': false,
-      'highlight-source': true,
-      'highlight-target': true
+      'highlight-source': false,
+      'highlight-target': false
     });
 
     this.source.addClass(
