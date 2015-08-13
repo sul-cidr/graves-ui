@@ -32,7 +32,7 @@ export default class MiniDoc {
 
     // Listen for resize (debounced).
     let resize = _.debounce(this.resize.bind(this), 500);
-    this.$source.resize(resize);
+    $(window).resize(resize);
 
     this.resize();
 
@@ -52,7 +52,7 @@ export default class MiniDoc {
 
     // Notify plugins.
     for (let plugin of this.plugins) {
-      plugin.resize();
+      plugin.position();
     }
 
   }
