@@ -47,7 +47,8 @@ export default class MiniDoc {
     // Visible height of source -> target height.
     let height = this.getTargetPx(this.$source[0].scrollHeight);
 
-    // Resize the SVG container.
+    // Resize the minidoc / SVG.
+    this.$target.css('height', height);
     this.svg.style('height', height);
 
     // Notify plugins.
