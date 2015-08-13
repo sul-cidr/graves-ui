@@ -58,13 +58,14 @@ export default class DivGroup extends Plugin {
 
     // Get the offset of the source container.
     let sourceOffset = this.minidoc.$source.offset();
+    let scrollTop = this.minidoc.$source[0].scrollTop;
 
     for (let pair of this.pairs) {
 
       let offset = pair.source.offset();
 
       let x = (offset.left - sourceOffset.left) * ratio;
-      let y = (offset.top - sourceOffset.top) * ratio;
+      let y = (offset.top - sourceOffset.top + scrollTop) * ratio;
       let w = pair.source.outerWidth() * ratio;
       let h = pair.source.outerHeight() * ratio;
 
