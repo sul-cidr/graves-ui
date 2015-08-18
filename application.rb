@@ -8,6 +8,10 @@ require 'slim/include'
 
 require_rel 'environment'
 
+use Rack::Auth::Basic, 'Protected' do |username, password|
+  username == ENV['APP_USERNAME'] and password == ENV['APP_PASSWORD']
+end
+
 configure do
   set :views, "#{File.dirname(__FILE__)}/views"
 end
