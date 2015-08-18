@@ -1,0 +1,3 @@
+[submodule "deploy/roles/rbenv"]
+	path = deploy/roles/rbenv
+	url = https://github.com/zzet/ansible-rbenv-role

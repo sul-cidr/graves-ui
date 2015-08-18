@@ -9,6 +9,7 @@ gem 'json'
 gem 'slim'
 gem 'redcarpet'
 gem 'sequel'
+gem 'passenger'
 
 group :development do
   gem 'foreman'

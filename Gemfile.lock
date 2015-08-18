@@ -5,6 +5,9 @@ GEM
     foreman (0.78.0)
       thor (~> 0.19.1)
     json (1.8.3)
+    passenger (5.0.15)
+      rack
+      rake (>= 0.8.1)
     rack (1.6.4)
     rack-livereload (0.3.16)
       rack
@@ -34,6 +37,7 @@ DEPENDENCIES
   dotenv
   foreman
   json
+  passenger
   rack-livereload
   rake
   redcarpet
