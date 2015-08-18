@@ -2,6 +2,7 @@
 compile:
   - symlink
   - browserify
+  - concat
   - less
 
 compile:min:
