@@ -46,8 +46,12 @@ export default Controller.extend({
 
     this.view = new Map();
 
+    NProgress.configure({
+      showSpinner: false,
+      tricklySpeed: 100
+    });
+
     // Start loader.
-    NProgress.configure({ showSpinner: false });
     NProgress.start();
 
     Promise.all([
