@@ -2,6 +2,7 @@
 
 import $ from 'jquery';
 import Radio from 'backbone.radio';
+import NProgress from 'nprogress';
 import Controller from '../lib/controller';
 import Map from '../views/map';
 import sections from '../data/sections.yml';
@@ -45,6 +46,10 @@ export default Controller.extend({
 
     this.view = new Map();
 
+    // Start loader.
+    NProgress.configure({ showSpinner: false });
+    NProgress.start();
+
     Promise.all([
       waitOnce('data', 'provinces'),
       waitOnce('data', 'burials')
@@ -54,6 +59,9 @@ export default Controller.extend({
       this.view.ingestProvinces(res[0]);
       this.view.ingestSections(sections);
       this.view.ingestBurials(res[1]);
+
+      // End loader.
+      NProgress.done();
 
       this.start();
 
