@@ -1,0 +1,28 @@
+---
+
+- name: Install Apache
+  apt:
+    pkg: '{{ item }}'
+    update_cache: yes
+    state: latest
+  with_items:
+    - apache2
+    - libapache2-mod-passenger
+
+- name: Enable modules
+  notify: restart apache
+  command: a2enmod {{ item }}
+  with_items:
+    - passenger
+
+- name: Remove the default config
+  notify: restart apache
+  file:
+    path: /etc/apache2/sites-enabled/000-default.conf
+    state: absent
+
+- name: Apply the config
+  notify: restart apache
+  template:
+    src: conf.j2
+    dest: /etc/apache2/sites-enabled/{{ apache_site_name }}.conf

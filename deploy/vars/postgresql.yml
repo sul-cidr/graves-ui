@@ -1,7 +1,6 @@
 ---
 
 postgresql_version: 9.4
-postgresql_default_auth_method: "md5"
 
 postgresql_databases:
   - name: '{{ pg_database }}'

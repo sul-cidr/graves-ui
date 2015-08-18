@@ -1,0 +1,14 @@
+
+<VirtualHost *:80>
+
+	ServerAdmin david@dclure.org
+	ServerName {{ apache_server_name }}
+	DocumentRoot {{ graves_src }}/public
+
+  <Directory {{ graves_src }}/public>
+      Require all granted
+      Allow from all
+      Options -MultiViews
+  </Directory>
+
+</VirtualHost>

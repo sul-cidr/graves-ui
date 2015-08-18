@@ -1,0 +1,7 @@
+---
+
+- name: Update the Graves source code
+  git:
+    repo: '{{ graves_repo }}'
+    version: '{{ graves_branch }}'
+    dest: '{{ graves_src }}'
