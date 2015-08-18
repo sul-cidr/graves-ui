@@ -10,7 +10,8 @@
     - vars/postgresql.yml
 
   roles:
-    #- rbenv
-    #- postgresql
-    #- apache
+    - rbenv
+    - postgresql
+    - apache
+    - nodejs
     - graves

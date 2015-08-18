@@ -21,7 +21,22 @@
     dest: '{{ graves_src }}'
     force: yes
 
-- name: Install dependencies
+- name: Bundle install
   command: bundle install
   args:
     chdir: '{{ graves_src }}'
+
+- name: NPM install
+  command: npm install
+  args:
+    chdir: "{{ graves_src }}"
+
+- name: Bower install
+  command: bower install --allow-root
+  args:
+    chdir: "{{ graves_src }}"
+
+- name: Build the application
+  command: grunt compile:min
+  args:
+    chdir: "{{ graves_src }}"

@@ -34,6 +34,7 @@
   "dependencies": {
     "babel": "^5.8.19",
     "backbone": "^1.2.1",
+    "backbone.radio": "^1.0.0",
     "bootstrap": "^3.3.5",
     "browserify": "^11.0.1",
     "d3": "^3.5.6",
