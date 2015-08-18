@@ -1,5 +1,5 @@
 ---
 
 graves_repo: https://github.com/sul-cidr/graves-ui.git
-graves_branch: master
+graves_branch: feature/deploy
 graves_src: /home/{{ ansible_ssh_user }}/graves
