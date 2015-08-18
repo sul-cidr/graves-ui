@@ -40,3 +40,9 @@
   command: grunt compile:min
   args:
     chdir: "{{ graves_src }}"
+
+- name: Apply .env
+  notify: restart apache
+  template:
+    src: .env.j2
+    dest: '{{ graves_src }}/.env'

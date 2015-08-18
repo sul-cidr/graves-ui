@@ -1,9 +1,11 @@
 ---
 
 postgresql_version: 9.4
+postgresql_ext_install_postgis: yes
 
 postgresql_databases:
   - name: '{{ pg_database }}'
+    gis: yes
 
 postgresql_users:
   - name: '{{ pg_user }}'

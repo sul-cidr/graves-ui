@@ -1,5 +1,5 @@
 ---
 
 ec2_image: ami-9eaa1cf6
-ec2_instance_type: t2.micro
+ec2_instance_type: m3.medium
 ec2_volume_size: 8
