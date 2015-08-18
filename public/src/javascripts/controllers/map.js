@@ -48,7 +48,7 @@ export default Controller.extend({
 
     NProgress.configure({
       showSpinner: false,
-      tricklySpeed: 100
+      trickleSpeed: 100
     });
 
     // Start loader.
