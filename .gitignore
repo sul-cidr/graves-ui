@@ -1,5 +1,5 @@
-node_modules
-bower_components
-npm-debug.log
-public/dist
-.env
+/node_modules
+/bower_components
+/public/dist
+/deploy/group_vars/all/secret.yml
+/.env
