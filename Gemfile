@@ -1,6 +1,7 @@
 
 source 'https://rubygems.org'
 
+gem 'pg'
 gem 'sinatra'
 gem 'rake'
 gem 'require_all'

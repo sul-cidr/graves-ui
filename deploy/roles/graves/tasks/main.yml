@@ -1,7 +1,27 @@
 ---
 
+- name: Install system dependencies
+  apt:
+    pkg: '{{ item }}'
+    update_cache: yes
+    state: latest
+  with_items:
+    - ruby-dev
+
+- name: Install bundler
+  gem:
+    name: bundler
+    state: present
+
 - name: Update the Graves source code
   git:
     repo: '{{ graves_repo }}'
     version: '{{ graves_branch }}'
     dest: '{{ graves_src }}'
+
+- name: Install dependencies
+  command: bundle install
+  become: yes
+  become_user: ubuntu
+  args:
+    chdir: '{{ graves_src }}'
