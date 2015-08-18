@@ -1,0 +1,16 @@
+---
+
+postgresql_version: 9.4
+postgresql_default_auth_method: "md5"
+
+postgresql_databases:
+  - name: '{{ pg_database }}'
+
+postgresql_users:
+  - name: '{{ pg_user }}'
+    pass: '{{ pg_pass }}'
+
+postgresql_user_privileges:
+  - name: '{{ pg_user }}'
+    db: '{{ pg_database }}'
+    priv: 'ALL'

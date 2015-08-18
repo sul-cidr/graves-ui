@@ -1,3 +1,6 @@
 [submodule "deploy/roles/rbenv"]
 	path = deploy/roles/rbenv
 	url = https://github.com/zzet/ansible-rbenv-role
+[submodule "deploy/roles/postgresql"]
+	path = deploy/roles/postgresql
+	url = https://github.com/ANXS/postgresql
