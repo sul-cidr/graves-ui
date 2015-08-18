@@ -1,0 +1,12 @@
+---
+
+- name: Configure the server
+  sudo: yes
+  hosts:
+    - tag_graves_ui
+
+  vars_files:
+    - vars/rbenv.yml
+
+  roles:
+    - rbenv
