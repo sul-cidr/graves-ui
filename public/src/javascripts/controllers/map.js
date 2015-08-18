@@ -61,6 +61,7 @@ export default Controller.extend({
       this.view.ingestBurials(res[1]);
 
       // End loader.
+      $('#spinner').hide();
       NProgress.done();
 
       this.start();
