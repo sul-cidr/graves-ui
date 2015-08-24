@@ -2,4 +2,5 @@
 /bower_components
 /public/dist
 /deploy/group_vars/all/secret.yml
+/views/text.html
 /.env
